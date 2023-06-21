@@ -1,0 +1,40 @@
+@import "_colors.scss";
+
+.auth{
+    background-color:$white;
+    color: $darkPurple;
+    width: 30%;
+    margin: 150px auto 0 auto;
+
+    .tabHeader{
+        font-weight: bolder;
+        display: flex;
+        justify-content: space-around;
+        padding:0%;
+
+        button{
+            background-color: $white;
+            border: none;
+            font-size: 1em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 100%;
+            height: 50px;
+
+            &.deselected:hover,&:hover{
+                color: $white;
+                cursor: pointer;
+                background-color:$pink;
+            }
+
+            &.deselected{
+                background-color: $grey;
+            }
+            
+        }
+        
+    }
+}

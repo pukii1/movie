@@ -1,0 +1,13 @@
+/*SASS partial for main color definition*/
+$pink: #FC4A78;
+$yellow:#FFB525;
+$purple:#7275A6;
+$darkPurple: #1F2034;
+$grey: #D3D3DD;
+$white: #ffffff;
+
+
+/*mixins*/
+@mixin bg-button-hover{
+    background-color: $purple;
+}

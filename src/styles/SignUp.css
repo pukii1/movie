@@ -1,0 +1,88 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.login, .signUp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+.login label, .signUp label {
+  text-align: right;
+  font-size: 0.8em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.login input[type=email],
+.login input[type=password],
+.login input[type=text], .signUp input[type=email],
+.signUp input[type=password],
+.signUp input[type=text] {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #D3D3DD;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.login input[type=email].userAlreadyExists,
+.login input[type=password].userAlreadyExists,
+.login input[type=text].userAlreadyExists, .signUp input[type=email].userAlreadyExists,
+.signUp input[type=password].userAlreadyExists,
+.signUp input[type=text].userAlreadyExists {
+  border-color: red;
+}
+.login .userAlreadyExistsTxt, .signUp .userAlreadyExistsTxt {
+  color: red;
+  font-size: 0.7em;
+  margin-top: 0;
+}
+.login .pwdContainer, .signUp .pwdContainer {
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  display: flex;
+}
+.login .pwdContainer #pwdInput, .signUp .pwdContainer #pwdInput {
+  width: 95%;
+  display: inline;
+}
+.login .pwdContainer .btnShowPwd, .signUp .pwdContainer .btnShowPwd {
+  padding: 0px;
+  width: 3%;
+}
+.login .pwdContainer .btnShowPwd .icon, .signUp .pwdContainer .btnShowPwd .icon {
+  display: inline;
+  color: #D3D3DD;
+}
+.login .pwdContainer .btnShowPwd .icon:hover, .signUp .pwdContainer .btnShowPwd .icon:hover {
+  color: #7275A6;
+  cursor: pointer;
+}
+.login button, .signUp button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #FC4A78;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.login button:hover, .signUp button:hover {
+  background-color: #7275A6;
+}
+.login .forgotPwd, .signUp .forgotPwd {
+  text-align: end;
+  width: 100%;
+}
+.login .btnContainer, .signUp .btnContainer {
+  background-color: #ffffff;
+  color: #D3D3DD;
+  margin: 0;
+}
+.login .btnContainer:hover, .signUp .btnContainer:hover {
+  background-color: #ffffff;
+  color: #7275A6;
+}/*# sourceMappingURL=SignUp.css.map */

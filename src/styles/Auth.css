@@ -1,0 +1,34 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.auth {
+  background-color: #ffffff;
+  color: #1F2034;
+  width: 30%;
+  margin: 150px auto 0 auto;
+}
+.auth .tabHeader {
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-around;
+  padding: 0%;
+}
+.auth .tabHeader button {
+  background-color: #ffffff;
+  border: none;
+  font-size: 1em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+}
+.auth .tabHeader button.deselected:hover, .auth .tabHeader button:hover {
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #FC4A78;
+}
+.auth .tabHeader button.deselected {
+  background-color: #D3D3DD;
+}/*# sourceMappingURL=Auth.css.map */

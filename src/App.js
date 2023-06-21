@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/App.scss';
+import SplashScreen from './components/SplashScreen';
+import Auth from './components/Auth';
+import { useEffect, useState } from 'react';
+
+
 
 function App() {
+
+  //Splash screen loading functionality
+const [loading, setLoading] = useState(true);
+const loadingTime = 2000;
+useEffect(() => {
+  // Simulate a loading process
+  setTimeout(() => {
+    setLoading(false);
+  }, loadingTime); // Adjust the timeout duration as needed
+}, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      { loading && <SplashScreen/>}
+      {!loading && <Auth/>}
     </div>
   );
 }

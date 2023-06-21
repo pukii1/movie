@@ -1,0 +1,11 @@
+- add color scheme in scss
+- set up project in firebase console
+- add firebase to react project
+
+
+- added ui for login + signup components
+- added email signup and login feature (no routing yet)
+
+TODO: signup + login error handling 
+TODO: routing
+TODO: reset Pwd
