@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../configs/firebaseConfig"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import GoogleSignIn from './GoogleSignIn';
 
 
 export default function SignUp() {
@@ -14,7 +15,6 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
-
   const [showPwd, setShowPwd] = useState(false);
   const [userAlreadyExists, setUserAlreadyExists] = useState(false);
   const [addUserAlreadyExistsClass, setAddUserAlreadyExistsClass] = useState(false);
@@ -74,7 +74,6 @@ export default function SignUp() {
   }
   
 
-
   return (
     <div className="signUp">
         <label htmlFor="emailInput">Email</label>
@@ -85,7 +84,7 @@ export default function SignUp() {
           onChange={onChangeEmail}/>
         { addUserAlreadyExistsClass && <p className="userAlreadyExistsTxt">It appears that you already have an account.</p>}
 
-        
+
         <label htmlFor="pwdInput">Password</label> 
         <div className="pwdContainer">
           <input 
@@ -101,7 +100,8 @@ export default function SignUp() {
         <button className="btnSubmit" onClick={signUp} type="submit"> 
           SIGN UP
         </button>
-
+        
+        <GoogleSignIn setUser={setUser}/>
 
       <p>UID: {user?.uid}</p>
     </div>

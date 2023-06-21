@@ -74,6 +74,16 @@ export default function Login() {
     setPwd(e.target.value)
   }
   
+
+  
+  useEffect(()=>{
+    if(user){
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [user])
+
   return (
     <div className="login">
        <label htmlFor="emailInput">Email</label>

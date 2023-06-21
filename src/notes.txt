@@ -6,6 +6,8 @@
 - added ui for login + signup components
 - added email signup and login feature (no routing yet)
 
+TODO: add google login/signUp DONE
+TODO: add logout feature DONE
 TODO: signup + login error handling 
 TODO: routing
 TODO: reset Pwd
