@@ -25,11 +25,11 @@
     border-radius: 3px;
     margin-bottom: 10px;
 
-    &.userAlreadyExists{
+    &.wrongPwd,&.userAlreadyExists{
       border-color: red;
     }
   } 
-  .userAlreadyExistsTxt{
+  .userAlreadyExistsTxt, .wrongPwdTxt{
     color: red;
     font-size: .7em;
     margin-top: 0;

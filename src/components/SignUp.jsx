@@ -84,6 +84,8 @@ export default function SignUp() {
           type="email" 
           onChange={onChangeEmail}/>
         { addUserAlreadyExistsClass && <p className="userAlreadyExistsTxt">It appears that you already have an account.</p>}
+
+        
         <label htmlFor="pwdInput">Password</label> 
         <div className="pwdContainer">
           <input 

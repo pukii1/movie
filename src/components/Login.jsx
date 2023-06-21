@@ -16,14 +16,25 @@ export default function Login() {
 
   const [pwdType, setPwdType] = useState("password")
   const [showPwd, setShowPwd] = useState(false);
+  const [wrongPwd, setWrongPwd] = useState(false);
+  const [addWrongPwdClass, setAddWrongPwdClass] = useState(false);
 
 
   const loginErrorHandling = (errCode)=>{
     switch(errCode){
-      case "":
+      case "auth/wrong-password":
+        setWrongPwd(true)
         break;
     }
   }
+  
+  useEffect(()=>{
+    if(wrongPwd){
+      setAddWrongPwdClass(true);
+    } else {
+      setAddWrongPwdClass(false)
+    }
+  }, [wrongPwd])
 
 
   
@@ -71,11 +82,10 @@ export default function Login() {
           id="emailInput" 
           type="email" 
           onChange={onChangeEmail}/>
-
         <label htmlFor="pwdInput">Password</label>          
         <div className="pwdContainer">
           <input 
-            className="inputField"
+            className={`inputField ${addWrongPwdClass ? 'wrongPwd' : ''}`}
             id="pwdInput" 
             type={pwdType}
             onChange={onChangePwd}/>
@@ -83,6 +93,8 @@ export default function Login() {
             <FontAwesomeIcon className="icon" icon={showPwd ? faEyeSlash : faEye}/> 
           </button>
         </div> 
+        {wrongPwd && <p className="wrongPwdTxt">You entered the wrong password. You can reset your password by clicking the "forgot password" link.</p>}
+
         
         <button className="btnSubmit" onClick={login} type="submit"> 
           LOGIN
