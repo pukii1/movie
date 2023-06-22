@@ -25,11 +25,11 @@
     border-radius: 3px;
     margin-bottom: 10px;
 
-    &.wrongPwd,&.userAlreadyExists{
+    &.wrongPwd,&.userAlreadyExists, &.userNotFound{
       border-color: red;
     }
   } 
-  .userAlreadyExistsTxt, .wrongPwdTxt{
+  .userAlreadyExistsTxt, .wrongPwdTxt, .userNotFoundTxt{
     color: red;
     font-size: .7em;
     margin-top: 0;
@@ -75,10 +75,19 @@
   }
   .forgotPwd{
     text-align: end;
-    width: 100%;
+    width: 60%;
   }
 
+  .googleAndResetContainer{
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 
+    .googleSignIn{
+      margin: 0;
+    }
+  }
   .btnContainer{
     background-color: $white;
     color: $grey;

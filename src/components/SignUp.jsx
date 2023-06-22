@@ -67,6 +67,7 @@ export default function SignUp() {
  
  
   const onChangeEmail = (e)=>{
+    setAddUserAlreadyExistsClass(false)
     setEmail(e.target.value)
   }
   const onChangePwd = (e)=>{
@@ -103,7 +104,6 @@ export default function SignUp() {
         
         <GoogleSignIn setUser={setUser}/>
 
-      <p>UID: {user?.uid}</p>
     </div>
   )
 }
