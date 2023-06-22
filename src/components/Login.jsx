@@ -20,15 +20,21 @@ export default function Login() {
   const [wrongPwd, setWrongPwd] = useState(false);
   const [addWrongPwdClass, setAddWrongPwdClass] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false)
-  const [addUserNotFoundClass, setAddUserNotFoundClass] = useState(false)
-
+  const [addEmailErrorClass, setAddEmailErrorClass] = useState(false)
+  const [emailErrorTxt, setEmailErrorTxt] = useState("")
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  
   const loginErrorHandling = (errCode)=>{
+    console.log(errCode)
     switch(errCode){
       case "auth/wrong-password":
         setWrongPwd(true)
         break;
       case "auth/user-not-found":
         setUserNotFound(true)
+        break;
+      case "auth/invalid-email":
+        setInvalidEmail(true);
         break;
     }
   }
@@ -37,13 +43,26 @@ export default function Login() {
   //add red outline to email input field on "user-not-found" error
   useEffect(()=>{
     if(userNotFound){
-      setAddUserNotFoundClass(true)
+      setAddEmailErrorClass(true)
+      setEmailErrorTxt("It appears that you dont have an existing account. Please sign up before logging in.")
     } else {
-      setAddUserNotFoundClass(false)
+      setEmailErrorTxt("");
+      setAddEmailErrorClass(false)
     }
   }, [userNotFound])
 
 
+    //add red outline to email input field on "user-not-found" error
+    useEffect(()=>{
+      if(invalidEmail){
+        setAddEmailErrorClass(true)
+        setEmailErrorTxt("Please enter a valid email adress.")
+      } else {
+        setEmailErrorTxt("");
+        setAddEmailErrorClass(false)
+      }
+    }, [invalidEmail])
+  
   //add red outline to pwd input field on "wrong-password" errror
   useEffect(()=>{
     if(wrongPwd){
@@ -69,6 +88,7 @@ export default function Login() {
       
     })
     .catch((error) => {
+      console.log(error)
       setError({code: error.code, msg: error.message})
       loginErrorHandling(error.code)
     });
@@ -87,6 +107,7 @@ export default function Login() {
   }
   const onChangeEmail = (e)=>{
     setUserNotFound(false);
+    setInvalidEmail(false);
     setEmail(e.target.value)
   }
   const onChangePwd = (e)=>{
@@ -100,11 +121,11 @@ export default function Login() {
     <div className="login">
        <label htmlFor="emailInput">Email</label>
         <input 
-          className={`inputField ${addUserNotFoundClass ? 'userNotFound' : ''}`}
+          className={`inputField ${addEmailErrorClass ? 'emailError' : ''}`}
           id="emailInput" 
           type="email" 
           onChange={onChangeEmail}/>
-        { addUserNotFoundClass && <p className="userNotFoundTxt">It appears that you dont have an existing account. Please sign up before logging in.</p>}
+        { addEmailErrorClass && <p className="emailErrorTxt">{emailErrorTxt}</p>}
 
 
         <label htmlFor="pwdInput">Password</label>          

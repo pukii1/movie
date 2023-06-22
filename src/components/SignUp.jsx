@@ -17,15 +17,20 @@ export default function SignUp() {
   const [user, setUser] = useState(null);
   const [showPwd, setShowPwd] = useState(false);
   const [userAlreadyExists, setUserAlreadyExists] = useState(false);
-  const [addUserAlreadyExistsClass, setAddUserAlreadyExistsClass] = useState(false);
+  const [addEmailErrorClass, setAddEmailErrorClass] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [emailErrorTxt, setEmailErrorTxt] = useState("")
 
-  
   const signUpErrorHandling = (errCode)=>{
+    console.log(errCode)
     switch(errCode){
       case "auth/email-already-in-use":
         setUserAlreadyExists(true);
         break;
-      default: 
+      
+      case "auth/invalid-email":
+        setInvalidEmail(true);
+        break;
     }
   }
 
@@ -35,12 +40,21 @@ export default function SignUp() {
 
   useEffect(() => {
     if (userAlreadyExists) {
-      setAddUserAlreadyExistsClass(true);
+      setEmailErrorTxt("It appears that you already have an account.")
+      setAddEmailErrorClass(true);
     } else {
-      setAddUserAlreadyExistsClass(false);
+      setAddEmailErrorClass(false);
     }
   }, [userAlreadyExists]);
   
+  useEffect(()=>{
+    if(invalidEmail){
+      setEmailErrorTxt("Please enter a valid email adress.")
+      setAddEmailErrorClass(true)
+    } else {
+      setAddEmailErrorClass(false)
+    }
+  }, [invalidEmail])
   //event handlers
   const signUp = (e)=>{
     e.preventDefault();
@@ -67,7 +81,7 @@ export default function SignUp() {
  
  
   const onChangeEmail = (e)=>{
-    setAddUserAlreadyExistsClass(false)
+    setAddEmailErrorClass(false)
     setEmail(e.target.value)
   }
   const onChangePwd = (e)=>{
@@ -79,11 +93,11 @@ export default function SignUp() {
     <div className="signUp">
         <label htmlFor="emailInput">Email</label>
         <input 
-          className={`inputField ${addUserAlreadyExistsClass ? 'userAlreadyExists' : ''}`}
+          className={`inputField ${addEmailErrorClass ? 'emailError' : ''}`}
           id="emailInput" 
           type="email" 
           onChange={onChangeEmail}/>
-        { addUserAlreadyExistsClass && <p className="userAlreadyExistsTxt">It appears that you already have an account.</p>}
+        { addEmailErrorClass && <p className="emailErrorTxt">{emailErrorTxt}</p>}
 
 
         <label htmlFor="pwdInput">Password</label> 

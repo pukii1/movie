@@ -14,8 +14,8 @@ TODO: add logout feature DONE
 TODO: add user header
 TODO: signup + login error handling 
     handled errors:
-    SignUp{ "user-already-exists" }
-    Login { "user-not-found", "wrong-password" }
-    
+    SignUp{ "email-already-exists", "invalid-email" }
+    Login { "user-not-found", "wrong-password", "invalid-email" }
+
 TODO: routing DONE
 TODO: reset Pwd

@@ -25,11 +25,11 @@
     border-radius: 3px;
     margin-bottom: 10px;
 
-    &.wrongPwd,&.userAlreadyExists, &.userNotFound{
+    &.wrongPwd, &.emailError{
       border-color: red;
     }
   } 
-  .userAlreadyExistsTxt, .wrongPwdTxt, .userNotFoundTxt{
+  .userAlreadyExistsTxt, .wrongPwdTxt, .emailErrorTxt{
     color: red;
     font-size: .7em;
     margin-top: 0;
