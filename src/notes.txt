@@ -6,8 +6,11 @@
 - added ui for login + signup components
 - added email signup and login feature (no routing yet)
 
+- added routing through custom private-/public route comps and conditional rendering based on authentication state
+
 TODO: add google login/signUp DONE
 TODO: add logout feature DONE
+TODO: add user header
 TODO: signup + login error handling 
-TODO: routing
+TODO: routing DONE
 TODO: reset Pwd

@@ -49,6 +49,7 @@ export default function Login() {
     .then((userCredential) => {
       // Signed in 
       setUser(userCredential.user);
+      
     })
     .catch((error) => {
       setError({code: error.code, msg: error.message})
@@ -71,18 +72,11 @@ export default function Login() {
     setEmail(e.target.value)
   }
   const onChangePwd = (e)=>{
+    setWrongPwd(false)
     setPwd(e.target.value)
   }
   
 
-  
-  useEffect(()=>{
-    if(user){
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, [user])
 
   return (
     <div className="login">
