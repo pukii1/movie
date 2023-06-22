@@ -20,6 +20,9 @@ export default function SignUp() {
   const [addEmailErrorClass, setAddEmailErrorClass] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [emailErrorTxt, setEmailErrorTxt] = useState("")
+  const [passWordErrorTxt, setPasswordErrorTxt] = useState("")
+  const [addPasswordErrorClass, setAddPasswordErrorClass] = useState(false)
+  const [weakPassword, setWeakPassword] = useState(false)
 
   const signUpErrorHandling = (errCode)=>{
     console.log(errCode)
@@ -30,6 +33,9 @@ export default function SignUp() {
       
       case "auth/invalid-email":
         setInvalidEmail(true);
+        break;
+      case "auth/weak-password":
+        setWeakPassword(true)
         break;
     }
   }
@@ -46,6 +52,17 @@ export default function SignUp() {
       setAddEmailErrorClass(false);
     }
   }, [userAlreadyExists]);
+  
+
+  useEffect(() => {
+    if (weakPassword) {
+      setPasswordErrorTxt("Please choose a stronger password. At least 6 characters.")
+      setAddPasswordErrorClass(true);
+    } else {
+      setAddPasswordErrorClass(false);
+    }
+  }, [weakPassword]);
+  
   
   useEffect(()=>{
     if(invalidEmail){
@@ -85,6 +102,8 @@ export default function SignUp() {
     setEmail(e.target.value)
   }
   const onChangePwd = (e)=>{
+    setWeakPassword(false)
+    setPasswordErrorTxt("")
     setPwd(e.target.value)
   }
   
@@ -103,7 +122,7 @@ export default function SignUp() {
         <label htmlFor="pwdInput">Password</label> 
         <div className="pwdContainer">
           <input 
-            className="inputField"
+            className={`inputField ${addPasswordErrorClass ? 'pwdError' : ''}`}
             id="pwdInput" 
             type={pwdType}
             onChange={onChangePwd}/>
@@ -111,7 +130,8 @@ export default function SignUp() {
             <FontAwesomeIcon className="icon" icon={showPwd ? faEyeSlash : faEye}/> 
           </button>
         </div>         
-          
+        {addPasswordErrorClass && <p className="pwdErrorTxt">{passWordErrorTxt}</p>}
+
         <button className="btnSubmit" onClick={signUp} type="submit"> 
           SIGN UP
         </button>

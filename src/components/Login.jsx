@@ -18,7 +18,7 @@ export default function Login() {
   const [pwdType, setPwdType] = useState("password")
   const [showPwd, setShowPwd] = useState(false);
   const [wrongPwd, setWrongPwd] = useState(false);
-  const [addWrongPwdClass, setAddWrongPwdClass] = useState(false);
+  const [addPasswordErrorClass, setAddPasswordErrorClass] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false)
   const [addEmailErrorClass, setAddEmailErrorClass] = useState(false)
   const [emailErrorTxt, setEmailErrorTxt] = useState("")
@@ -66,9 +66,9 @@ export default function Login() {
   //add red outline to pwd input field on "wrong-password" errror
   useEffect(()=>{
     if(wrongPwd){
-      setAddWrongPwdClass(true);
+      setAddPasswordErrorClass(true);
     } else {
-      setAddWrongPwdClass(false)
+      setAddPasswordErrorClass(false)
     }
   }, [wrongPwd])
 
@@ -88,7 +88,6 @@ export default function Login() {
       
     })
     .catch((error) => {
-      console.log(error)
       setError({code: error.code, msg: error.message})
       loginErrorHandling(error.code)
     });
@@ -131,7 +130,7 @@ export default function Login() {
         <label htmlFor="pwdInput">Password</label>          
         <div className="pwdContainer">
           <input 
-            className={`inputField ${addWrongPwdClass ? 'wrongPwd' : ''}`}
+            className={`inputField ${addPasswordErrorClass ? 'pwdError' : ''}`}
             id="pwdInput" 
             type={pwdType}
             onChange={onChangePwd}/>
@@ -139,7 +138,7 @@ export default function Login() {
             <FontAwesomeIcon className="icon" icon={showPwd ? faEyeSlash : faEye}/> 
           </button>
         </div> 
-        {wrongPwd && <p className="wrongPwdTxt">You entered the wrong password. You can reset your password by clicking the "forgot password" link.</p>}
+        {addPasswordErrorClass && <p className="pwdErrorTxt">You entered the wrong password. You can reset your password by clicking the "forgot password" link.</p>}
 
         
         <button className="btnSubmit" onClick={login} type="submit"> 
