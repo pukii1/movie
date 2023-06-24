@@ -1,11 +1,9 @@
 import React from 'react'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react"
 import Login from "./Login"
 import SignUp from "./SignUp"
-import SignOut from "./SignOut"
 import "../styles/Auth.scss"
-
+import Logo from "./Logo"
 
 export default function Auth() {
     const [login, setLogin] = useState(false)
@@ -24,13 +22,16 @@ export default function Auth() {
 
 
     return (
-      <div className="auth">
+      <div className="authContainer">
+        <Logo/>
+        <div className="auth">
         <div className="tabHeader">
           <button value="login" onClick={selectAuthMethod} className={`loginHeader ${login ? '' : 'deselected'}`}>Login</button>
           <button  value="signUp" onClick={selectAuthMethod} className={`signUpHeader ${login ? 'deselected' : ''}`}>Sign Up</button>
         </div>
 
         { login ? <Login/> : <SignUp/>}
+        </div>
       </div>
   )
 }

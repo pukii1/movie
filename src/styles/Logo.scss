@@ -1,0 +1,8 @@
+@import "./colors.scss";
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-top: 150px;
+    border-right: 1px solid rgba(200,200,200, .2);
+}

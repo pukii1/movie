@@ -1,0 +1,22 @@
+.splashScreen{
+
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+    @keyframes flash-animation {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      img{
+        animation: flash-animation 1s linear infinite;
+      }
+}
