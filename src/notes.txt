@@ -12,6 +12,8 @@
 
 - added user navbar icons (used react icons instead of fontawesome) + added Dev component to circumvent the login routing 
   for developing the other comps etc.
+- added data component as a container for the api data (added general header navigation [allows switching between movies/TV series]
+  + navbar for navigating between default popular selection + entire collection)
   
 TODO: add google signUp DONE
 TODO: add google login

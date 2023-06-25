@@ -1,0 +1,67 @@
+@import "./colors.scss";
+
+.data {
+    .navigation {
+        width: 100%;
+        display: flex;
+        margin-top: 30px;
+        justify-content: space-around;
+
+        button {
+            border:none;
+            background: transparent;
+            color: $white;
+
+            &.popular{
+                font-size: 1.5em;
+                font-weight: bolder;
+
+                &:hover {
+                    color: $pink;
+                }
+            }
+            &.seeAll{
+                font-size: 1.1em;
+                color: $pink;
+                display: flex;
+                align-items: center;
+            }
+
+            &:hover{
+                cursor: pointer;
+                font-weight: bolder;
+            }
+        }
+    }
+    .tabHeader{
+        font-weight: bolder;
+        display: flex;
+        justify-content: space-around;
+        padding:0%;
+        width: 100%;
+        button{
+            border:none;
+            color: $white;
+            background-color: transparent;
+            font-size: 1em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 20%;
+            height: 50px;
+            opacity: 50%;
+            &.deselected:hover,&:hover{
+                opacity: 100%;
+                border-bottom: 1px solid $pink;
+                cursor: pointer;
+            }
+
+            &.selected {
+                border-bottom: 1px solid $pink;
+                opacity: 100%;
+            }
+        }
+    }
+}
