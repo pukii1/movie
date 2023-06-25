@@ -1,20 +1,21 @@
 import './styles/App.scss';
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getAuth, onAuthStateChanged, setPersistence, browserSessionPersistence } from "firebase/auth"
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-
+import SplashScreen from './components/SplashScreen';
+import Dev from './components/Dev';
 
 function App() {
-
   const [isAuthChecked, setIsAuthChecked] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(true)
   const auth = getAuth();
-
+  const dev = true;
+  setPersistence(auth, browserSessionPersistence)
 
 
 
@@ -22,35 +23,53 @@ function App() {
 
 //callback passed to the onAuthStateChanged function that gets 
 //called whenever the auth variable changes/ new instance is assigned
-const authChangeCallback = (user) => {
-  if (user) {
-    setIsAuthenticated(true);
-  } else {
-    setIsAuthenticated(false);
-  }
 
-  setIsAuthChecked(true);
-}
+
+useEffect(() => {
+  const setPersistenceForAuth = async () => {
+    try {
+      await setPersistence(auth, browserSessionPersistence);
+    } catch (error) {
+      console.log("Error setting persistence: " + error.message);
+    }
+  };
+
+  setPersistenceForAuth();
+}, [auth]);
+
+useEffect(() => {
+  const authChangeCallback = (user) => {
+    if (user) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+    setIsAuthChecked(true);
+  };
+
+  const unsubFromAuthStateObserver = onAuthStateChanged(auth, authChangeCallback);
+
+  return () => {
+    unsubFromAuthStateObserver();
+  };
+}, [auth]);
+
 
 useEffect(()=>{
-  //storing firebase onAuthStateChanged return value -> function to unsub from the auth observer
-  const unsubFromAuthStateObserver = 
-  //setting up a new AuthStateObserver whenever @auth changes
-  //triggers callback whenever @auth changes
-  onAuthStateChanged(auth, authChangeCallback);
-  
-  //clean-up function
-  return ()=>{
-    unsubFromAuthStateObserver();
-  }
-}, [auth])
-
-
-
-  //loading state if authentication state hasnt yet been checked
-  if( !isAuthChecked ){
+  setLoading(true)
+  setTimeout(()=>{
+    setLoading(false)
+  }, 7000)
+}, [])
+  if(dev) {
     return (
-      <p>loading....</p>
+        <Dev/>
+    )
+  }
+  //loading state if authentication state hasnt yet been checked
+  if(loading || !isAuthChecked ){
+    return (
+      <SplashScreen/>
     )
   }
   return (

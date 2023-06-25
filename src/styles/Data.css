@@ -1,0 +1,60 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.data .navigation {
+  width: 100%;
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-around;
+}
+.data .navigation button {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+}
+.data .navigation button.popular {
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+.data .navigation button.popular:hover {
+  color: #FC4A78;
+}
+.data .navigation button.seeAll {
+  font-size: 1.1em;
+  color: #FC4A78;
+  display: flex;
+  align-items: center;
+}
+.data .navigation button:hover {
+  cursor: pointer;
+  font-weight: bolder;
+}
+.data .tabHeader {
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-around;
+  padding: 0%;
+  width: 100%;
+}
+.data .tabHeader button {
+  border: none;
+  color: #ffffff;
+  background-color: transparent;
+  font-size: 1em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 20%;
+  height: 50px;
+  opacity: 50%;
+}
+.data .tabHeader button.deselected:hover, .data .tabHeader button:hover {
+  opacity: 100%;
+  border-bottom: 1px solid #FC4A78;
+  cursor: pointer;
+}
+.data .tabHeader button.selected {
+  border-bottom: 1px solid #FC4A78;
+  opacity: 100%;
+}/*# sourceMappingURL=Data.css.map */

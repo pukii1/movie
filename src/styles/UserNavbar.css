@@ -1,0 +1,24 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.userNavbar {
+  border-top: 1px solid rgba(200, 200, 200, 0.5);
+  padding: 20px 100px 30px 100px;
+  width: 100%;
+  position: fixed;
+  box-sizing: border-box;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.userNavbar .navButton {
+  font-size: 2em;
+  display: inline;
+  width: 50px;
+  background-color: transparent;
+  border: none;
+  color: #FC4A78;
+}
+.userNavbar .navButton:hover {
+  cursor: pointer;
+}/*# sourceMappingURL=UserNavbar.css.map */

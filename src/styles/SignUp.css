@@ -26,14 +26,18 @@
   border-radius: 3px;
   margin-bottom: 10px;
 }
-.login input[type=email].userAlreadyExists,
-.login input[type=password].userAlreadyExists,
-.login input[type=text].userAlreadyExists, .signUp input[type=email].userAlreadyExists,
-.signUp input[type=password].userAlreadyExists,
-.signUp input[type=text].userAlreadyExists {
+.login input[type=email].pwdError, .login input[type=email].emailError,
+.login input[type=password].pwdError,
+.login input[type=password].emailError,
+.login input[type=text].pwdError,
+.login input[type=text].emailError, .signUp input[type=email].pwdError, .signUp input[type=email].emailError,
+.signUp input[type=password].pwdError,
+.signUp input[type=password].emailError,
+.signUp input[type=text].pwdError,
+.signUp input[type=text].emailError {
   border-color: red;
 }
-.login .userAlreadyExistsTxt, .signUp .userAlreadyExistsTxt {
+.login .userAlreadyExistsTxt, .login .pwdErrorTxt, .login .emailErrorTxt, .signUp .userAlreadyExistsTxt, .signUp .pwdErrorTxt, .signUp .emailErrorTxt {
   color: red;
   font-size: 0.7em;
   margin-top: 0;
@@ -75,7 +79,16 @@
 }
 .login .forgotPwd, .signUp .forgotPwd {
   text-align: end;
+  width: 60%;
+}
+.login .googleAndResetContainer, .signUp .googleAndResetContainer {
+  margin-top: 10px;
+  display: flex;
   width: 100%;
+  justify-content: space-between;
+}
+.login .googleAndResetContainer .googleSignIn, .signUp .googleAndResetContainer .googleSignIn {
+  margin: 0;
 }
 .login .btnContainer, .signUp .btnContainer {
   background-color: #ffffff;

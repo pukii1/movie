@@ -1,19 +1,23 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-export default function NavbarButton({hoverIcon, icon}) {
+export default function NavbarButton({currentPath, history, path, hoverIcon, icon}) {
     const [isHovered, setIsHovered] = useState(false);
 
-    const handleMouseEnter = (e)=>{
+    const handleMouseEnter = ()=>{
         setIsHovered(true)
     }
-    const handleMouseLeave = (e)=>{
+    const handleMouseLeave = ()=>{
         setIsHovered(false)
     }
+    const handleClick = (e)=>{
+        e.preventDefault();
+       history(path)
+    }
     return (
-    <button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="navButton">
-        {isHovered ? hoverIcon : icon}
+    <button onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="navButton">
+        {isHovered || (currentPath == path) ? hoverIcon : icon}
     </button>
   )
 }

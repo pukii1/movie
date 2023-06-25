@@ -1,18 +1,30 @@
 /*SASS partial for main color definition*/
 /*mixins*/
-.auth {
+.authContainer {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 150px 0 150px;
+}
+.authContainer .logo {
+  flex-basis: 50%;
+}
+.authContainer .auth {
   background-color: #ffffff;
   color: #1F2034;
-  width: 30%;
-  margin: 150px auto 0 auto;
+  flex-basis: 30%;
+  margin-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.auth .tabHeader {
+.authContainer .auth .tabHeader {
   font-weight: bolder;
   display: flex;
   justify-content: space-around;
   padding: 0%;
 }
-.auth .tabHeader button {
+.authContainer .auth .tabHeader button {
   background-color: #ffffff;
   border: none;
   font-size: 1em;
@@ -24,11 +36,11 @@
   width: 100%;
   height: 50px;
 }
-.auth .tabHeader button.deselected:hover, .auth .tabHeader button:hover {
+.authContainer .auth .tabHeader button.deselected:hover, .authContainer .auth .tabHeader button:hover {
   color: #ffffff;
   cursor: pointer;
   background-color: #FC4A78;
 }
-.auth .tabHeader button.deselected {
+.authContainer .auth .tabHeader button.deselected {
   background-color: #D3D3DD;
 }/*# sourceMappingURL=Auth.css.map */
