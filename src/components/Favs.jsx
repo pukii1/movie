@@ -1,10 +1,11 @@
 import React from 'react'
 import UserNavbar from './UserNavbar'
+import Header from './Header'
 
 export default function Favs({currentPath}) {
   return (
     <div>
-      Favs
+      <Header title={"Favs"}/>
       <UserNavbar currentPath={currentPath}/>
     </div>
   )

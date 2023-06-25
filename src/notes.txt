@@ -14,7 +14,9 @@
   for developing the other comps etc.
 - added data component as a container for the api data (added general header navigation [allows switching between movies/TV series]
   + navbar for navigating between default popular selection + entire collection)
-  
+- fixed navigation errors + added basic page components like Search, Favs, User and Home ("/") + added Header component for said pages
+
+TODO: add drop down user menu to Header comp w link to user profile page and sign out button
 TODO: add google signUp DONE
 TODO: add google login
 TODO: add logout feature DONE
