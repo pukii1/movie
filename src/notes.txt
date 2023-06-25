@@ -9,6 +9,10 @@
 - added routing through custom private-/public route comps and conditional rendering based on authentication state
 
 - added loading screen and makeshift logo
+
+- added user navbar icons (used react icons instead of fontawesome) + added Dev component to circumvent the login routing 
+  for developing the other comps etc.
+  
 TODO: add google signUp DONE
 TODO: add google login
 TODO: add logout feature DONE
