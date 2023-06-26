@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 
 // Private Route Component - Only accessible to authenticated users
 export default function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
@@ -11,7 +11,7 @@ export default function PrivateRoute({ component: Component, isAuthenticated, ..
             isAuthenticated ? (
               <Component {...props} />
             ) : (
-              <Redirect to="/login" />
+              <Navigate to="/login" />
             )
           }
         />

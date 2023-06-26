@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 
 export default function PublicRoute({ component: Component, isAuthenticated, ...rest}) {
     return (
@@ -7,7 +7,7 @@ export default function PublicRoute({ component: Component, isAuthenticated, ...
           {...rest}
           render={(props) =>
             isAuthenticated ? (
-              <Redirect to ="/" />
+              <Navigate to ="/" />
             ) : (
               <Component {...props}/>
             )

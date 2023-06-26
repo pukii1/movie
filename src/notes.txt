@@ -16,6 +16,8 @@
   + navbar for navigating between default popular selection + entire collection)
 - fixed navigation errors + added basic page components like Search, Favs, User and Home ("/") + added Header component for said pages
 
+- completed header-navbar w user dropdown menu w navigation to the user page and the signout feature
+
 TODO: add drop down user menu to Header comp w link to user profile page and sign out button
 TODO: add google signUp DONE
 TODO: add google login
