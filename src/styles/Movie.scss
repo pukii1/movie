@@ -1,0 +1,14 @@
+@import "./colors.scss";
+
+.movie {
+    padding: 20px;
+    border-radius: 10px;
+
+    .movieImg {
+        width: 200px;
+    }
+    .bottomTab {
+        display: flex;
+        justify-content: space-between;
+    }
+}

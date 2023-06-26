@@ -2,4 +2,27 @@
 
 .movieCarousel {
     color: $white;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    flex-wrap: wrap;
+
+    .carouselNavigation {
+        flex-basis: 100%;
+        display: flex;
+        justify-content:  center;
+
+        button {
+            border: none;
+            background-color: transparent;
+            color: $white;
+            font-size: 2em;
+            
+            &:hover {
+                cursor: pointer;
+                color: $pink;
+            }
+        }
+
+    }
 }

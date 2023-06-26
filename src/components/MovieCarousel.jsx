@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import "../styles/MovieCarousel.scss"
 import Movie from './Movie'
+import { BiSolidChevronLeft } from 'react-icons/bi'
+import { BiSolidChevronRight } from 'react-icons/bi'
 
 export default function MovieCarousel({data}) {
     const [renderMovies, setRenderMovies] = useState(true)
@@ -30,8 +32,8 @@ export default function MovieCarousel({data}) {
       {renderMovies && displayIdxs.map((idx) => (<Movie data={data[idx]} idx={displayIdxs[idx]} key={idx} />))}
       <div className="carouselNavigation">
         {renderMovies && <>
-          <button onClick={rotateLeft}>left</button>
-          <button onClick={rotateRight}>right</button>
+          <button onClick={rotateLeft}><BiSolidChevronLeft/></button>
+          <button onClick={rotateRight}><BiSolidChevronRight/></button>
         </>}
         
       </div>
