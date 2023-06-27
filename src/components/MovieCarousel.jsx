@@ -6,7 +6,6 @@ import { BiSolidChevronLeft } from 'react-icons/bi'
 import { BiSolidChevronRight } from 'react-icons/bi'
 
 export default function MovieCarousel({data}) {
-    console.log(data)
     const [renderMovies, setRenderMovies] = useState(true)
     const numMovies = data?.length - 1; 
     const [displayIdxs, setDisplayIdxs] = useState([0, 1, 2])

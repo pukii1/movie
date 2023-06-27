@@ -19,11 +19,13 @@
 - completed header-navbar w user dropdown menu w navigation to the user page and the signout feature
 - fixed movie card styling + carousel rotation logic + movie img rendering (initial render displayed wrong img bc data prop hadnt been passed down yet)
 
-TODO: add drop down user menu to Header comp w link to user profile page and sign out button
+TODO: add comments!!!
+TODO: fix movie img fetching loading animation
+TODO: add drop down user menu to Header comp w link to user profile page and sign out button DONE
 TODO: add google signUp DONE
 TODO: add google login
 TODO: add logout feature DONE
-TODO: add user header
+TODO: add user header DONE
 TODO: signup + login error handling 
     handled errors:
     SignUp{ "email-already-exists", "invalid-email" }
