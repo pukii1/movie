@@ -1,15 +1,48 @@
 @import "./colors.scss";
 
 .movie {
-    padding: 20px;
-    border-radius: 10px;
+    margin: 20px;
+    box-sizing: border-box;
+    border-radius: 40px;
+    width: 200px;
+    height: 300px;
+    position: relative;
 
+    .mainTitle{
+        text-align: center;
+        font-weight: bolder;
+    }
+    .rating {
+        span {
+            color:$yellow;
+            margin: auto;
+        }
+    }
     .movieImg {
-        width: 200px;
+    border-radius: 20px;
+
+        width: 100%;
         height: 300px;
     }
     .bottomTab {
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        width: 100%;
+        background-color: rgba(31, 32, 52, .8);
+        top:230px;
+        position: absolute;
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
+        .title{
+            margin: 0;
+            text-align: center;
+            flex-basis: 100%;
+        }
+        .yr, .rating{
+            margin-top: 5px;
+        }
     }
 }

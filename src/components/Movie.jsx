@@ -2,8 +2,9 @@ import React from 'react'
 import "../styles/Movie.scss"
 import { useState, useEffect } from "react"
 import LoadingWaves from './LoadingWaves'
+import {AiFillStar} from "react-icons/ai"
 
-export default function Movie({data, idx}) {
+export default function Movie({data, rotationIndex, idx}) {
   const [imgSrc, setImgSrc] = useState(data?.primaryImage?.url)
   const [imgAlt, setImgAlt] = useState(data?.primaryImage?.caption.plainText)
   const [rating, setRating] = useState(null)
@@ -42,7 +43,6 @@ export default function Movie({data, idx}) {
       const result = await response.json();
       setRating(result.results.averageRating);
       setRatingsLoaded(true)
-      console.log(result)
     } catch (error) {
       console.error(error);
     }
@@ -65,10 +65,14 @@ export default function Movie({data, idx}) {
         alt={imgAlt}
       />
       
-      <p>{data.originalTitleText.text}</p>
+      { rotationIndex == 1 && <p className="mainTitle">{data.originalTitleText.text}</p>}
       <div className="bottomTab">
-        <p>{data.releaseYear?.year}</p>
-        {ratingsLoaded && <p>{rating}</p>}
+        <p className="title">{data.originalTitleText.text.toUpperCase()}</p>
+        <p className="yr">{data.releaseYear?.year}</p>
+        {ratingsLoaded && 
+          <p className="rating">
+            <span><AiFillStar/></span>{rating}%
+          </p>}
       </div>
     </div>
   )
