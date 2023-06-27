@@ -8,15 +8,16 @@ import MovieCarousel from './MovieCarousel'
 export default function Data() {
     const [movies, setDataType] = useState(true)
     const [data, setData] = useState(null)
-    const selectDataType = ()=>{
-        setDataType((prev)=>!prev)
+    const selectDataType = (e)=>{
+        setDataType(()=> e.target.value == "movies" )
     }
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true);
     const randomUrl = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies'
+    const randomSeriesUrl =  'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_series';
+    const [fetchUrl, setFetchUrl] = useState(randomUrl);
     const host = 'moviesdatabase.p.rapidapi.com'
     const apiKey = 'f9e45181a3msh422b41bfbdd3bdbp127d70jsndf222028a016'
-    const url = randomUrl
     const options = {
       method: 'GET',
       headers: {
@@ -26,7 +27,7 @@ export default function Data() {
     };
   const fetchData = async ()=>{
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(fetchUrl, options);
       const result = await response.json();
       setData(result.results);
       setLoading(false)
@@ -39,7 +40,14 @@ export default function Data() {
   useEffect(()=>{
     fetchData();
   }, [])
+  useEffect(()=>{
+    setFetchUrl(()=> movies ? randomUrl : randomSeriesUrl)
+  }, [movies])
 
+  useEffect(()=>{
+    fetchData();
+  }, [fetchUrl])
+  
   useEffect(()=>{
     if(data){
       setLoading(false)
@@ -52,8 +60,8 @@ export default function Data() {
   return (
     <div className="data">
       <div className="tabHeader">
-          <button value="movies" onClick={selectDataType} className={`loginHeader ${movies ? 'selected' : 'deselected'}`}>Movies</button>
-          <button  value="series" onClick={selectDataType} className={`signUpHeader ${movies ? 'deselected' : 'selected'}`}>TV Series</button>
+          <button value="movies" onClick={(e)=>{selectDataType(e)}} className={`loginHeader ${movies ? 'selected' : 'deselected'}`}>Movies</button>
+          <button  value="series" onClick={(e)=>{selectDataType(e)}} className={`signUpHeader ${movies ? 'deselected' : 'selected'}`}>TV Series</button>
         </div>
         <div className="navigation">
             

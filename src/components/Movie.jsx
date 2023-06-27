@@ -5,15 +5,24 @@ import LoadingWaves from './LoadingWaves'
 import {AiFillStar} from "react-icons/ai"
 
 export default function Movie({data, rotationIndex, idx}) {
-  const [imgSrc, setImgSrc] = useState(data?.primaryImage?.url)
-  const [imgAlt, setImgAlt] = useState(data?.primaryImage?.caption.plainText)
+  const [imgSrc, setImgSrc] = useState(null)
+  const [imgAlt, setImgAlt] = useState(null)
   const [rating, setRating] = useState(null)
   const [ratingsLoaded, setRatingsLoaded] = useState(false)
   const [loading, setLoading] = useState(true)
-  const ratingsUrl = 'https://moviesdatabase.p.rapidapi.com/titles/tt1797504/ratings';
+  const ratingsUrl = `https://moviesdatabase.p.rapidapi.com/titles/${data.id}/ratings`;
   const ratingsApiKey = 'f9e45181a3msh422b41bfbdd3bdbp127d70jsndf222028a016';
   const host =  'moviesdatabase.p.rapidapi.com' 
 
+
+
+  useEffect(() => {
+    if (data) {
+      setImgSrc(data.primaryImage?.url);
+      setImgAlt(data.primaryImage?.caption.plainText);
+    }
+  }, [data]);
+    
   const options = {
     method: 'GET',
     headers: {

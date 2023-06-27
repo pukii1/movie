@@ -18,7 +18,7 @@ export default function MovieCarousel({data}) {
 
     const rotateRight = ()=>{
         setRenderMovies(false)
-        setDisplayIdxs((displayIdxs)=> displayIdxs.map((idx)=>(idx + 1 + numMovies + 1) % numMovies))
+        setDisplayIdxs((displayIdxs)=> displayIdxs.map((idx)=>(idx + 1 + numMovies) % numMovies  + 1))
     }
 
     useEffect(()=>{
