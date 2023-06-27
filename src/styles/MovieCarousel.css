@@ -2,4 +2,23 @@
 /*mixins*/
 .movieCarousel {
   color: #ffffff;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.movieCarousel .carouselNavigation {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+}
+.movieCarousel .carouselNavigation button {
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 2em;
+}
+.movieCarousel .carouselNavigation button:hover {
+  cursor: pointer;
+  color: #FC4A78;
 }/*# sourceMappingURL=MovieCarousel.css.map */

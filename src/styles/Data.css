@@ -1,5 +1,8 @@
 /*SASS partial for main color definition*/
 /*mixins*/
+.data .error, .data .loading {
+  margin: 0 auto;
+}
 .data .navigation {
   width: 100%;
   display: flex;

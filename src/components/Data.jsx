@@ -60,7 +60,9 @@ export default function Data() {
             <button onClick={()=>{}}className="popular">Popular</button>
             <button className="seeAll">See all <BiChevronRight/></button>
         </div>
-        {error ? <div>An error occured, unfortunately we couldnt fetch any movies.</div>: <>{loading ? <div>Loading...</div> : <MovieCarousel data={data}/>}</>}
+        
+        {error ? <div className="error">An error occured, unfortunately we couldnt fetch any movies.</div>: 
+                 <>{loading ? <div className="loading">Loading...</div> : <MovieCarousel data={data}/>}</>}
       
     </div>
   )
