@@ -17,6 +17,7 @@
 - fixed navigation errors + added basic page components like Search, Favs, User and Home ("/") + added Header component for said pages
 
 - completed header-navbar w user dropdown menu w navigation to the user page and the signout feature
+- fixed movie card styling + carousel rotation logic + movie img rendering (initial render displayed wrong img bc data prop hadnt been passed down yet)
 
 TODO: add drop down user menu to Header comp w link to user profile page and sign out button
 TODO: add google signUp DONE
