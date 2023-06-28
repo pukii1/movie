@@ -27,7 +27,7 @@ TODO: add comments!!!
 TODO: fix movie img fetching loading animation DONE
 TODO: add drop down user menu to Header comp w link to user profile page and sign out button DONE
 TODO: add google signUp DONE
-TODO: add google login
+TODO: add google login DONE
 TODO: add logout feature DONE
 TODO: add user header DONE
 TODO: signup + login error handling 
