@@ -7,6 +7,34 @@
     margin: 0 auto;
     flex-wrap: wrap;
 
+    .movieContainer{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        
+        .movie {
+            &:first-of-type {
+                transform: rotateZ(-5deg);
+                opacity: 60%;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            &.lastMovie {
+                opacity: 60%;
+                transform: rotateZ(5deg);
+                
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    
+   
+    
     .carouselNavigation {
         flex-basis: 100%;
         display: flex;

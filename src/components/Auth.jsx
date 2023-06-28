@@ -7,7 +7,6 @@ import Logo from "./Logo"
 
 export default function Auth() {
     const [login, setLogin] = useState(false)
-    const [user, setUser] = useState(null)
     const selectAuthMethod = (e)=>{
         switch(e.target.value){
             case "login":
@@ -23,7 +22,7 @@ export default function Auth() {
 
     return (
       <div className="authContainer">
-        <Logo/>
+        {/*<Logo/>*/}
         <div className="auth">
         <div className="tabHeader">
           <button value="login" onClick={selectAuthMethod} className={`loginHeader ${login ? '' : 'deselected'}`}>Login</button>

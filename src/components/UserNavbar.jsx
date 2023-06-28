@@ -9,7 +9,7 @@ import "../styles/UserNavbar.scss"
 
 export default function UserNavbar({currentPath}) {
   const history = useNavigate();
-  
+    
   return (
     <div className="userNavbar">
       <NavbarButton currentPath={currentPath} history={history} path="/" icon={<BiMoviePlay/>} hoverIcon={<BiSolidMoviePlay/>}/>

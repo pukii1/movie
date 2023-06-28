@@ -7,6 +7,27 @@
   margin: 0 auto;
   flex-wrap: wrap;
 }
+.movieCarousel .movieContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.movieCarousel .movieContainer .movie:first-of-type {
+  transform: rotateZ(-5deg);
+  opacity: 60%;
+}
+.movieCarousel .movieContainer .movie:first-of-type:hover {
+  cursor: pointer;
+}
+.movieCarousel .movieContainer .movie.lastMovie {
+  opacity: 60%;
+  transform: rotateZ(5deg);
+}
+.movieCarousel .movieContainer .movie.lastMovie:hover {
+  cursor: pointer;
+}
 .movieCarousel .carouselNavigation {
   flex-basis: 100%;
   display: flex;

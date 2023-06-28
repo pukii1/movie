@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import LoadingWaves from './LoadingWaves'
 import {AiFillStar} from "react-icons/ai"
 
-export default function Movie({data, rotationIndex, idx}) {
+export default function Movie({data, lastMovie, rotationIndex, rotate, idx}) {
   const [imgSrc, setImgSrc] = useState(null)
   const [imgAlt, setImgAlt] = useState(null)
   const [rating, setRating] = useState(null)
@@ -61,11 +61,14 @@ export default function Movie({data, rotationIndex, idx}) {
     }
   }
 
-
+  
   return (
-    <div className="movie">
-      {  <LoadingWaves/> }
-      {/*<img 
+    <div 
+      onClick={rotate}
+      className={`movie ${lastMovie ? 'lastMovie' : ''}`}
+    >
+      { loadingImg && <LoadingWaves/> }
+      {<img 
       style={imageStyle}
         className="movieImg"
         onLoad={handleImgLoad} 
@@ -73,7 +76,7 @@ export default function Movie({data, rotationIndex, idx}) {
         src={imgSrc} 
         alt={imgAlt}
       />
-  */}
+  }
       { rotationIndex == 1 && <p className="mainTitle">{data.originalTitleText.text}</p>}
       <div className="bottomTab">
         <p className="title">{data.originalTitleText.text.toUpperCase()}</p>

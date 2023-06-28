@@ -18,7 +18,9 @@
 
 - completed header-navbar w user dropdown menu w navigation to the user page and the signout feature
 - fixed movie card styling + carousel rotation logic + movie img rendering (initial render displayed wrong img bc data prop hadnt been passed down yet)
-
+- actually fixed rotation logic, added some styles to the movie comps + added login/signup comp to user profile page 
+  + added redirect to homepage after login
+  
 TODO: add comments!!!
 TODO: fix movie img fetching loading animation DONE
 TODO: add drop down user menu to Header comp w link to user profile page and sign out button DONE
