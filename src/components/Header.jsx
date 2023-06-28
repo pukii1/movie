@@ -1,25 +1,38 @@
 import React from 'react'
 import "../styles/Header.scss"
 import {BsThreeDotsVertical } from 'react-icons/bs'
-import { useState } from "react"
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from 'react-router-dom'
 import SignOut from "./SignOut.jsx"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 export default function Header({title}) {
 
+  const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
-    const auth = getAuth();
+  const auth = getAuth();
   const user = auth.currentUser;
-  const [showSignOut, setShowSignOut] = useState(auth.currentUser)
+  const [showSignOut, setShowSignOut] = useState(false)
+  
+  
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
 
-  onAuthStateChanged( auth, (user)=>{
-    if(user){
-      setShowSignOut(true);
-    } else {
-      setShowSignOut(false)
-    }
-  })
+    setShowSignOut(user !== null);
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setShowSignOut(user !== null);
+    });
+
+    return () => {
+      unsubscribe(); // Clean up the auth state change listener
+    };
+  }, []);
+
+  const redirectAfterLogin = ()=>{
+    navigate("/user")
+  }
 
   return (
     <div className='header'>
@@ -37,7 +50,7 @@ export default function Header({title}) {
             className={`user-dropdown-menu ${showUserMenu ? 'showUserMenu' : ''}`}>
             {/*<p>User: {user?.uid} is authenticated</p>*/}
             <Link to="/user" className="menu-item">Settings</Link>
-            { showSignOut ? <div className="menu-item"><SignOut/></div> : <div>login</div>}
+            { showSignOut ? <div className="menu-item"><SignOut/></div> : <div onClick={redirectAfterLogin}className="menu-item">login</div>}
         </div>
       </div>
     </div>

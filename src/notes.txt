@@ -20,6 +20,8 @@
 - fixed movie card styling + carousel rotation logic + movie img rendering (initial render displayed wrong img bc data prop hadnt been passed down yet)
 - actually fixed rotation logic, added some styles to the movie comps + added login/signup comp to user profile page 
   + added redirect to homepage after login
+- added conditional display of login/signout option in the dropdown menu of the header comp depending on the users auth state
+
   
 TODO: add comments!!!
 TODO: fix movie img fetching loading animation DONE
