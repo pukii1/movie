@@ -1,5 +1,5 @@
 import React from 'react'
-import "../styles/Logo.scss"
+import "../../styles/Logo.scss"
 
 
 export default function Logo() {

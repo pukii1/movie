@@ -1,9 +1,9 @@
 import React from 'react'
-import "../styles/Header.scss"
+import "../../styles/Header.scss"
 import {BsThreeDotsVertical } from 'react-icons/bs'
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom'
-import SignOut from "./SignOut.jsx"
+import SignOut from "../innerComponents/SignOut.jsx"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 export default function Header({title}) {

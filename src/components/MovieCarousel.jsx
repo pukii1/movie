@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import "../styles/MovieCarousel.scss"
-import Movie from './Movie'
+import MovieCard from './innerComponents/MovieCard'
 import { BiSolidChevronLeft } from 'react-icons/bi'
 import { BiSolidChevronRight } from 'react-icons/bi'
 
@@ -35,7 +35,7 @@ export default function MovieCarousel({data}) {
     <div className="movieCarousel">
       <div className="movieContainer" style={{'transform' : `translateX${translateX}`}}>
         {renderMovies && displayIdxs.map((idx, index) => (
-          <Movie 
+          <MovieCard 
             data={data[idx]} 
             idx={displayIdxs[idx]} 
             rotationIndex={keys[index]} 

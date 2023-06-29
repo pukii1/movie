@@ -1,0 +1,27 @@
+@import "./colors.scss";
+
+.favs{
+    height: 100%;
+
+    .loFavs{
+        margin-top:200px;
+        text-align: center;
+        color: $purple;
+        opacity: 70%;
+        .icon{
+            font-size: 5em;
+            color: $white;
+        }
+        button {
+            color: $purple;
+            border: none;
+            background-color: transparent;
+            &:hover{
+                color: $pink;
+                cursor: pointer;
+                font-weight: bolder;
+                opacity: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.favs {
+  height: 100%;
+}
+.favs .loFavs {
+  margin-top: 200px;
+  text-align: center;
+  color: #7275A6;
+  opacity: 70%;
+}
+.favs .loFavs .icon {
+  font-size: 5em;
+  color: #ffffff;
+}
+.favs .loFavs button {
+  color: #7275A6;
+  border: none;
+  background-color: transparent;
+}
+.favs .loFavs button:hover {
+  color: #FC4A78;
+  cursor: pointer;
+  font-weight: bolder;
+  opacity: 100%;
+}/*# sourceMappingURL=Favs.css.map */

@@ -1,6 +1,6 @@
 import React from 'react'
-import UserNavbar from './UserNavbar'
-import Header from './Header'
+import UserNavbar from './sharedComponents/UserNavbar'
+import Header from './sharedComponents/Header'
 
 export default function Search({currentPath}) {
   return (

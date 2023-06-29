@@ -4,8 +4,8 @@ import { BiMoviePlay, BiSolidMoviePlay, BiSolidSearch, BiSearch, BiHeart, BiSoli
 import { PiUserFocus, PiUserFocusFill } from "react-icons/pi"
 import { tbLetterF } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom';
-import NavbarButton from './NavbarButton';
-import "../styles/UserNavbar.scss"
+import NavbarButton from '../innerComponents/NavbarButton';
+import "../../styles/UserNavbar.scss"
 
 export default function UserNavbar({currentPath}) {
   const history = useNavigate();

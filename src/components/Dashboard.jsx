@@ -1,8 +1,8 @@
 import React from 'react'
 import { getAuth } from "firebase/auth"
-import UserNavbar from './UserNavbar.jsx';
+import UserNavbar from './sharedComponents/UserNavbar.jsx';
 import Data from './Data.jsx';
-import Header from "./Header.jsx"
+import Header from "./sharedComponents/Header.jsx"
 
 export default function Dashboard({currentPath}) {
     const auth = getAuth();

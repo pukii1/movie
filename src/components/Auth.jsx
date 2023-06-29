@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from "react"
-import Login from "./Login"
-import SignUp from "./SignUp"
+import Login from "./innerComponents/Login"
+import SignUp from "./innerComponents/SignUp"
 import "../styles/Auth.scss"
-import Logo from "./Logo"
+import Logo from "./sharedComponents/Logo"
 
 export default function Auth() {
     const [login, setLogin] = useState(false)

@@ -1,15 +1,17 @@
 import React from 'react'
-import "../styles/Movie.scss"
-import { useState, useEffect, useRef } from "react"
-import LoadingWaves from './LoadingWaves'
-import {AiFillStar} from "react-icons/ai"
-
-export default function Movie({data, lastMovie, rotationIndex, rotate, idx}) {
+import "../../styles/MovieCard.scss"
+import { useState, useEffect} from "react"
+import LoadingWaves from '../LoadingWaves'
+import {AiFillStar, AiFillHeart} from "react-icons/ai"
+import { BsFillBookmarkHeartFill } from 'react-icons/bs'
+import { getAuth, onAuthStateChanged } from "firebase/auth"
+export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx}) {
   const [imgSrc, setImgSrc] = useState(null)
   const [imgAlt, setImgAlt] = useState(null)
   const [rating, setRating] = useState(null)
   const [loadingImg, setLoadingImg] = useState(true)
   const [ratingsLoaded, setRatingsLoaded] = useState(false)
+  const [allowLike, setAllowLike] = useState(false)
   const ratingsUrl = `https://moviesdatabase.p.rapidapi.com/titles/${data.id}/ratings`;
   const ratingsApiKey = 'f9e45181a3msh422b41bfbdd3bdbp127d70jsndf222028a016';
   const host =  'moviesdatabase.p.rapidapi.com' 
@@ -17,6 +19,22 @@ export default function Movie({data, lastMovie, rotationIndex, rotate, idx}) {
     display: loadingImg ? 'none' : 'block',
   };
 
+  if(rotationIndex == 1){
+    useEffect(() => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+  
+      setAllowLike(user !== null);
+  
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setAllowLike(user !== null);
+      });
+  
+      return () => {
+        unsubscribe(); // Clean up the auth state change listener
+      };
+    }, []);
+  }
   useEffect(() => {
     if (data) {
       setImgSrc(data.primaryImage?.url);
@@ -61,6 +79,9 @@ export default function Movie({data, lastMovie, rotationIndex, rotate, idx}) {
     }
   }
 
+  const likeMovie = ()=>{
+    console.log(`liking "${data.originalTitleText.text}"...`)
+  }
   
   return (
     <div 
@@ -77,6 +98,7 @@ export default function Movie({data, lastMovie, rotationIndex, rotate, idx}) {
         alt={imgAlt}
       />
   }
+      { allowLike && (rotationIndex == 1) && <span className="likeHeart" onClick={likeMovie}><BsFillBookmarkHeartFill/></span>}
       { rotationIndex == 1 && <p className="mainTitle">{data.originalTitleText.text}</p>}
       <div className="bottomTab">
         <p className="title">{data.originalTitleText.text.toUpperCase()}</p>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from "react"
-import '../styles/SignUp.scss';
+import '../../styles/SignUp.scss';
 import { Navigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from "../configs/firebaseConfig"
+import {auth} from "../../configs/firebaseConfig"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import GoogleSignIn from './GoogleSignIn';
