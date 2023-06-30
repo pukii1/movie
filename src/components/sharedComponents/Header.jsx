@@ -1,6 +1,7 @@
 import React from 'react'
 import "../../styles/Header.scss"
 import {BsThreeDotsVertical } from 'react-icons/bs'
+import { AiFillProfile } from 'react-icons/ai'
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import SignOut from "../innerComponents/SignOut.jsx"
@@ -9,9 +10,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 export default function Header({title}) {
 
   const navigate = useNavigate();
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const auth = getAuth();
-  const user = auth.currentUser;
+  const [showUserMenu, setShowUserMenu] = useState(true);
   const [showSignOut, setShowSignOut] = useState(false)
   
   
@@ -47,9 +46,12 @@ export default function Header({title}) {
         {/**Dropdown user menu */}
           <div 
              onMouseLeave={()=>{setShowUserMenu(false)}}
-            className={`user-dropdown-menu ${showUserMenu ? 'showUserMenu' : ''}`}>
+            className={`user-dropdown-menu showUserMenu`}>
+
             {/*<p>User: {user?.uid} is authenticated</p>*/}
-            <Link to="/user" className="menu-item">Settings</Link>
+            <Link to="/user" className="menu-item profileSettings">
+              <AiFillProfile className="psIcon"/>Settings
+            </Link>
             { showSignOut ? <div className="menu-item"><SignOut/></div> : <div onClick={redirectAfterLogin}className="menu-item">login</div>}
         </div>
       </div>

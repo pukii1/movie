@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAuth, signOut } from "firebase/auth"
 import { useNavigate } from 'react-router-dom';
+import { BiSolidChevronsLeft } from 'react-icons/bi'
 
 export default function SignOut() {
     const auth = getAuth();
@@ -16,7 +17,7 @@ export default function SignOut() {
 
     return (
     <div className="signOut">
-        <button onClick={handleSignOut} className="signOut">Sign Out</button>
+        <button onClick={handleSignOut} className="signOut"><BiSolidChevronsLeft className="signOutIcon"/>Sign Out</button>
     </div>
   )
 }
