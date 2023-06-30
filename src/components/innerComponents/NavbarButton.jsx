@@ -15,7 +15,7 @@ export default function NavbarButton({currentPath, history, path, hoverIcon, ico
        history(path)
     }
     return (
-    <button onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="navButton">
+    <button onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`navButton`}>
         {isHovered || (currentPath == path) ? hoverIcon : icon}
     </button>
   )

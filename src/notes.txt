@@ -26,6 +26,9 @@
   + added conditional display in Favs comp w button to user login page if user not logged in 
   + added UI for liking movie on homepage
   
+- fixed movie service + added "create new doc in favs-db if user-doc doesnt already exist" feature
+- added "logo" icon to userNavbar -> navigates to homepage on onClick
+ 
 TODO: reset Pwd + continue working on user/profile page layout
 TODO: add comments!!!
 TODO: fix movie img fetching loading animation DONE

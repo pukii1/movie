@@ -86,8 +86,9 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
   const favMovie = ()=>{
     const auth = getAuth();
     const user = auth.currentUser
-    likeMovie(user, data.id)
+    likeMovie(user.uid, data.id)
   }
+
 
   return (
     <div 
