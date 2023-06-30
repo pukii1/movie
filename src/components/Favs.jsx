@@ -10,6 +10,8 @@ import { BsEmojiFrown } from "react-icons/bs"
 import { getLikedMovies } from '../services/movieService'
 import { useNavigate } from 'react-router-dom'
 import { getCachedLikedMovies, cacheLikedMovies } from '../services/movieService'
+import { db } from "../configs/firebaseConfig"
+import { onSnapshot, doc } from 'firebase/firestore'
 
 
 /**
@@ -37,11 +39,10 @@ const LoggedOutFavs = ()=>{
  */
 const LoggedInFavs = ()=>{
   const [displayFavs, setDisplayFavs ] = useState(false)
-  const [cacheLikedMovies, setCachedLikedMovies] = useState(null)
   const [likedMovies, setLikedMovies] = useState(null)
 
 
-  
+  //get liked movies from cache or db if not stored in cache yet  
   const glMovies = async ()=>{
     const auth = getAuth();
     const userId = auth.currentUser.uid
@@ -54,6 +55,37 @@ const LoggedInFavs = ()=>{
  }, [])
 
 
+ useEffect(()=>{
+  const auth = getAuth()
+  const user = auth.currentUser
+  if( user !== null){
+    //reference the correct doc corresponding to the current user to only listen to changes to that users doc 
+    const userDocRef = doc(db, "favs", user.uid)
+    const unsubscribe = onSnapshot(userDocRef, (docSnapshot)=>{
+      if(docSnapshot.exists()){
+        //get the data from the snapshot
+        const userData = docSnapshot.data()
+        console.log(userData)
+        //if the data is null -> set likedMovies to an empty array
+        const updatedLikedMovies = userData.favMovies || []
+        //update likedMovies
+        setLikedMovies(updatedLikedMovies)
+        console.log(`updated liked movies: `)
+        console.log(updatedLikedMovies.join(", "))
+      }
+      else {
+        //TODO handle this
+        console.error("snapshot unavailable")
+      }
+    })
+
+    //unsub from db change listener once component unmounts by triggering unsub function returned by the onSnapshot fct
+    return ()=>{unsubscribe()}
+  }
+  
+ }, [])
+
+ //check if there are any favs if true -> set displayFavs flag to true
  useEffect(()=>{
   console.log(likedMovies)
   setDisplayFavs(likedMovies !== null)
