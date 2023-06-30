@@ -32,7 +32,6 @@
   flex-basis: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 60px;
 }
 .movieCarousel .carouselNavigation button {
   opacity: 70%;

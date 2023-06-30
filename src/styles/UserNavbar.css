@@ -1,15 +1,31 @@
 /*SASS partial for main color definition*/
 /*mixins*/
 .userNavbar {
-  border-top: 1px solid rgba(200, 200, 200, 0.5);
-  padding: 20px 100px 30px 100px;
+  border-top: 1px solid rgba(200, 200, 200, 0.3);
+  padding: 30px 100px 30px 100px;
   width: 100%;
   position: fixed;
   box-sizing: border-box;
   bottom: 0;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-evenly;
+}
+.userNavbar .designCredits {
+  flex-basis: 100%;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 0.7em;
+}
+.userNavbar .designCredits .designCreditLink {
+  text-decoration: none;
+  color: #FC4A78;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.userNavbar .designCredits .designCreditLink:hover {
+  cursor: pointer;
 }
 .userNavbar .navButton {
   font-size: 2em;

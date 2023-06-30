@@ -32,7 +32,10 @@
 - modified movie fetching -> now all movie data is cached/removed from cache when user likes a movie /removes it from their likes
   + Favs fetches liked movies from cache to minimize chained API calls + added like/remove from likes feature to movies displayed in Favs
 - added firestore snapshot listener to update list of liked movies in real time on the Favs page when user removes a movie from their likedMovies list
+- added Design credit ('You are launched' on Dribbble)
 
+TODO: divide Favs into movies + tv series, similar UI to the homepage ("/"), implement movies/tv-series separation in DB + cache too
+TODO: add design credits DONE
 TODO: use firestore onSnapshot listener to communicate updates made to the cache on the Favs page to Favs page without needing to refresh page DONE
 TODO: cache favs + only fetch from firestore if not already in cache + place function in movieService.js DONE
 TODO: reset Pwd + continue working on user/profile page layout

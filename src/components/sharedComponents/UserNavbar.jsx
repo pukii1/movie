@@ -17,6 +17,13 @@ export default function UserNavbar({currentPath}) {
       <NavbarButton icon={<TbCircleLetterF/>} history={history} path="/" hoverIcon={<TbCircleLetterF/>}/>
       <NavbarButton currentPath={currentPath} history={history} path="/favs" icon={<BiHeart/>} hoverIcon={<BiSolidHeart/>}/>
       <NavbarButton currentPath={currentPath} history={history} path="/user" icon={<PiUserFocus/>} hoverIcon={<PiUserFocusFill/>}/>
+      <div className="designCredits">Design Inspired By 
+        <a 
+          className="designCreditLink" 
+          href="https://dribbble.com/shots/19276559-Flick-Movie-and-TV-Series-Database-App"> 
+          'You are launched' 
+        </a> 
+      On Dribbble</div>
     </div>
   )
 }

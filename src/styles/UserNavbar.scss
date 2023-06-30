@@ -1,16 +1,32 @@
 @import "./colors.scss";
 
 .userNavbar{
-    border-top: 1px solid rgba(200,200,200,.5);
-    padding: 20px 100px 30px 100px;
+    border-top: 1px solid rgba(200,200,200,.3);
+    padding: 30px 100px 30px 100px;
     width: 100%;
     position: fixed;
     box-sizing: border-box;
     bottom: 0;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
     
+    .designCredits {
+        flex-basis: 100%;
+        text-align: center;
+        margin-top: 5px;
+        font-size: .7em;
+        .designCreditLink {
+            text-decoration: none;
+            color: $pink;
+            margin-left: 5px;
+            margin-right: 5px;
+            &:hover{
+                cursor:pointer;
+            }
+        }
+    }
     .navButton {
     
         
