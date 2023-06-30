@@ -28,7 +28,9 @@
   
 - fixed movie service + added "create new doc in favs-db if user-doc doesnt already exist" feature
 - added "logo" icon to userNavbar -> navigates to homepage on onClick
- 
+- added movieFetching feature for logged in users on the Favs page 
+
+TODO: cache favs + only fetch from firestore if not already in cache + place function in movieService.js
 TODO: reset Pwd + continue working on user/profile page layout
 TODO: add comments!!!
 TODO: fix movie img fetching loading animation DONE

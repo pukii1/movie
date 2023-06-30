@@ -3,6 +3,16 @@
 .favs {
   height: 100%;
 }
+.favs .liFavs {
+  margin-top: 100px;
+}
+.favs .liFavs .movieContainer {
+  justify-content: space-around;
+  display: flex;
+}
+.favs .liFavs .movieContainer .movie:hover {
+  cursor: pointer;
+}
 .favs .loFavs {
   margin-top: 200px;
   text-align: center;

@@ -56,3 +56,19 @@ export const likeMovie = async (userId, movieId)=>{
         
     }
 }
+
+export const getLikedMovies = async (userId) =>{
+    //reference desired doc
+    const userDocRef = doc(db, "favs", userId);
+    
+    // Retrieve the user doc from favs-collection
+    const userDocSnap = await getDoc(userDocRef);
+
+    //check if doc exists
+    if (userDocSnap.exists()) {
+        // return the favMovies entry
+        return userDocSnap.data().favMovies;
+    }
+    //doc doesnt exist -> return null
+    return null;
+}
