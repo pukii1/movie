@@ -7,19 +7,13 @@ import Auth from "./Auth.jsx"
 import { getAuth, onAuthStateChanged, signInWithRedirect } from "firebase/auth"
 
 export default function User({currentPath}) {
-    const navigate = useNavigate();
+    
     const auth = getAuth();
-    
-    onAuthStateChanged(auth, (user)=>{
-      if(user){
-        navigate("/")
-      }
-    })
-    
+    const user = auth.currentUser
     return (
     <div>
         <Header title={"Profile"}/>
-        <Auth/>
+        {!user && <Auth/>}
         <UserNavbar currentPath={currentPath}/>
     </div>
   )
