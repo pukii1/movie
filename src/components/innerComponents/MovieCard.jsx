@@ -2,10 +2,14 @@ import React from 'react'
 import "../../styles/MovieCard.scss"
 import { useState, useEffect} from "react"
 import LoadingWaves from '../LoadingWaves'
-import {AiFillStar, AiFillHeart} from "react-icons/ai"
+import {AiFillStar} from "react-icons/ai"
 import { BsFillBookmarkHeartFill } from 'react-icons/bs'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { likeMovie } from '../../services/movieService'
+
 export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx}) {
+
+
   const [imgSrc, setImgSrc] = useState(null)
   const [imgAlt, setImgAlt] = useState(null)
   const [rating, setRating] = useState(null)
@@ -79,10 +83,12 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
     }
   }
 
-  const likeMovie = ()=>{
-    console.log(`liking "${data.originalTitleText.text}"...`)
+  const favMovie = ()=>{
+    const auth = getAuth();
+    const user = auth.currentUser
+    likeMovie(user, data.id)
   }
-  
+
   return (
     <div 
       onClick={rotate}
@@ -98,7 +104,7 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
         alt={imgAlt}
       />
   }
-      { allowLike && (rotationIndex == 1) && <span className="likeHeart" onClick={likeMovie}><BsFillBookmarkHeartFill/></span>}
+      { allowLike && (rotationIndex == 1) && <span className="likeHeart" onClick={favMovie}><BsFillBookmarkHeartFill/></span>}
       { rotationIndex == 1 && <p className="mainTitle">{data.originalTitleText.text}</p>}
       <div className="bottomTab">
         <p className="title">{data.originalTitleText.text.toUpperCase()}</p>
