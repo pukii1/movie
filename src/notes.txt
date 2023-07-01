@@ -38,7 +38,7 @@
   + redirect-to-homepage option 
 - impl. movies/series separation in DB + cache (added respective functions to 'movieService')
 
-
+TODO: fix redirect arrow position in Favs>NoLikesYet
 TODO: divide Favs into movies + tv series, similar UI to the homepage ("/"), implement movies/tv-series separation in DB + cache too DONE
 TODO: add design credits DONE
 TODO: use firestore onSnapshot listener to communicate updates made to the cache on the Favs page to Favs page without needing to refresh page DONE
