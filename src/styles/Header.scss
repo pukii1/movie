@@ -33,7 +33,7 @@
         transform: translateX(50%);
         position: absolute;
         display: none;
-        text-align: center;
+
         
         &.showUserMenu {
             display: block;
@@ -57,23 +57,9 @@
             font-size: 14px;
             text-decoration: none;
             color: #333;
-            width: 50px;
-            .profileSettings{
-                display:flex;
-                justify-content: space-around;
-                align-items: center;
-
-                .psIcon{
-                    margin-right: 3px;
-                }
-            }
+        
             .signOut{
                 color: $darkPurple;
-                display:flex;
-                align-items: center;
-                .signOutIcon {
-                    margin-right: 3px;
-                }
             }
             &:hover{
                 cursor: pointer;

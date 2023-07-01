@@ -3,6 +3,39 @@
 .favs{
     height: 100%;
 
+    .tabHeader{
+        font-weight: bolder;
+        display: flex;
+        justify-content: space-around;
+        padding:0%;
+        width: 100%;
+        button{
+            border:none;
+            color: $white;
+            background-color: transparent;
+            font-size: 1em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 20%;
+            height: 50px;
+            opacity: 50%;
+            &.deselected:hover,&:hover{
+                opacity: 100%;
+                border-bottom: 1px solid $pink;
+                cursor: pointer;
+            }
+
+            &.selected {
+                border-bottom: 1px solid $pink;
+                opacity: 100%;
+            }
+        }
+    }
+
+    /*styles for inner 'LoggedInFavs' comp*/
     .liFavs{
         margin-top: 100px;
         .movieContainer{
@@ -14,7 +47,34 @@
                 cursor: pointer;
             }
         }
+
+
+
+        .noLikesYet{
+            opacity: 80%;
+            text-align: center;
+            width: 400px;
+
+            .redirectToHomeContainer{
+                display: inline-block;
+                width: 100%;
+                .redirectToHome{
+                    margin: 0px;
+                    width: 30px;
+                    display: flex;
+                    align-items: center;
+                    color: $pink;
+                    &:hover{
+                        font-weight: bolder;    
+                        opacity: 100%;
+                        cursor: pointer;
+                    }
+                }
+            }
+            
+        }
     }
+    /*styles for inner 'LoggedOutFavs' comp*/
     .loFavs{
         margin-top:200px;
         text-align: center;

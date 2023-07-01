@@ -34,7 +34,12 @@
 - added firestore snapshot listener to update list of liked movies in real time on the Favs page when user removes a movie from their likedMovies list
 - added Design credit ('You are launched' on Dribbble)
 
-TODO: divide Favs into movies + tv series, similar UI to the homepage ("/"), implement movies/tv-series separation in DB + cache too
+- added movie/series separation on Favs page (LoggedInFavs) + added 'NoLikesYet' comp to render msg to user if no movies/series have been liked yet
+  + redirect-to-homepage option 
+- impl. movies/series separation in DB + cache (added respective functions to 'movieService')
+
+
+TODO: divide Favs into movies + tv series, similar UI to the homepage ("/"), implement movies/tv-series separation in DB + cache too DONE
 TODO: add design credits DONE
 TODO: use firestore onSnapshot listener to communicate updates made to the cache on the Favs page to Favs page without needing to refresh page DONE
 TODO: cache favs + only fetch from firestore if not already in cache + place function in movieService.js DONE

@@ -3,11 +3,11 @@ import "../styles/Favs.scss"
 import UserNavbar from './sharedComponents/UserNavbar'
 import Header from './sharedComponents/Header'
 import MovieCard from './innerComponents/MovieCard'
-import LoadingWaves from './LoadingWaves'
+import { BsArrowRight } from 'react-icons/bs'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useState, useEffect } from "react"
 import { BsEmojiFrown } from "react-icons/bs"
-import { getLikedMovies } from '../services/movieService'
+import { getLikedMovies, getLikedSeries } from '../services/movieService'
 import { useNavigate } from 'react-router-dom'
 import { getCachedLikedMovies, cacheLikedMovies } from '../services/movieService'
 import { db } from "../configs/firebaseConfig"
@@ -37,10 +37,11 @@ const LoggedOutFavs = ()=>{
 /**
  * Inner component that displays the users liked movies when signed in
  */
-const LoggedInFavs = ()=>{
-  const [displayFavs, setDisplayFavs ] = useState(false)
+const LoggedInFavs = ({showMovies})=>{
+  const [displayFavMovies, setDisplayFavMovies ] = useState(false)
+  const [displayFavSeries, setDisplayFavSeries ] = useState(false)
   const [likedMovies, setLikedMovies] = useState(null)
-
+  const [likedSeries, setLikedSeries] = useState(null)
 
   //get liked movies from cache or db if not stored in cache yet  
   const glMovies = async ()=>{
@@ -51,17 +52,38 @@ const LoggedInFavs = ()=>{
     setLikedMovies(likedMovies)
   }
  useEffect(()=>{
-  glMovies()
+  if(likedMovies == null) {
+    glMovies()
+  }
  }, [])
 
 
+   //get liked tvSeries from cache or db if not stored in cache yet  
+   const glSeries = async ()=>{
+    const auth = getAuth();
+    const userId = auth.currentUser.uid
+    let likedSeries = await getLikedSeries(userId)
+    console.log(likedSeries)
+    setLikedMovies(likedSeries)
+  }
+ useEffect(()=>{
+  if(!showMovies){
+    if(likedSeries == null){
+      glSeries()
+    }
+  }
+ }, [showMovies])
+
+
+ //update list of liked movies in real-time by listening to db-changes
  useEffect(()=>{
   const auth = getAuth()
   const user = auth.currentUser
   if( user !== null){
     //reference the correct doc corresponding to the current user to only listen to changes to that users doc 
     const userDocRef = doc(db, "favs", user.uid)
-    const unsubscribe = onSnapshot(userDocRef, (docSnapshot)=>{
+    //Listen to changes to favMovies
+    const unsubscribeFromMovieDB = onSnapshot(userDocRef, (docSnapshot)=>{
       if(docSnapshot.exists()){
         //get the data from the snapshot
         const userData = docSnapshot.data()
@@ -79,17 +101,46 @@ const LoggedInFavs = ()=>{
       }
     })
 
+    //listen to changes to favTVSeries
+    const unsubscribeFromTVSeriesDB = onSnapshot(userDocRef, (docSnapshot)=>{
+      if(docSnapshot.exists()){
+        //get the data from the snapshot
+        const userData = docSnapshot.data()
+        console.log(userData)
+        //if the data is null -> set likedMovies to an empty array
+        const updatedLikedSeries = userData.favTVSeries || []
+        //update likedMovies
+        setLikedSeries(updatedLikedSeries)
+        console.log(`updated liked movies: `)
+        console.log(updatedLikedSeries.join(", "))
+      }
+      else {
+        //TODO handle this
+        console.error("snapshot unavailable")
+      }
+    })
+
     //unsub from db change listener once component unmounts by triggering unsub function returned by the onSnapshot fct
-    return ()=>{unsubscribe()}
+    return ()=>{
+      unsubscribeFromMovieDB()
+      unsubscribeFromTVSeriesDB()
+    }
   }
   
  }, [])
 
- //check if there are any favs if true -> set displayFavs flag to true
+ //check if there are any favs (movies or shows), if true -> set displayFavs flag to true
  useEffect(()=>{
-  console.log(likedMovies)
-  setDisplayFavs(likedMovies !== null)
- }, [likedMovies])
+  if(showMovies){
+    console.log(likedMovies)
+    setDisplayFavMovies(likedMovies !== null && likedMovies.length != 0)    
+  } else {
+    console.log(likedSeries)
+    console.log(`show movies: ${showMovies}, displayFavSeries: ${displayFavSeries}`)
+    setDisplayFavSeries(likedSeries !== null && likedSeries.length != 0)
+  }
+  
+ }, [likedMovies, likedSeries])
 
 
   
@@ -99,22 +150,55 @@ const LoggedInFavs = ()=>{
 
   return (
     <div className='liFavs'>
-      { displayFavs ? 
-        <div className="movieContainer">{likedMovies.map((mv, i)=> {  
-          return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
-          })}</div> 
-        : <LoadingWaves/>}
+      <div className="movieContainer">
+        { showMovies && displayFavMovies && likedMovies.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
+            })}
 
+        { !showMovies && displayFavSeries && likedSeries.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
+            })}
+        { (!showMovies && !displayFavSeries) && <NoLikesYet movies={showMovies}/>}
+        { ( showMovies && !displayFavMovies) && <NoLikesYet movies={showMovies}/>}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Component rendered if user is logged in but hasnt liked any movies (if 'Movies' tab is selected)
+ * or shows (if 'TV Series' tab is selected) + redirect-to-homepage ("/") option
+ * @param {*} param0 movies, indicates whether user doesnt have any liked movies or shows yet
+ * @returns 
+ */
+const NoLikesYet = ({movies})=>{
+  const navigate = useNavigate()
+  const mediaType = movies ? 'movies' : 'shows'
+  
+  
+  const redirectToHome = ()=>{
+    navigate("/")
+  }
+  return (
+    <div className="noLikesYet">
+      <p>Looks like you haven't liked any {mediaType} yet...</p>
+      <p className="redirectToHomeContainer">Lets change that! <span onClick={redirectToHome} className="redirectToHome"><BsArrowRight /></span></p>
     </div>
   )
 }
 
 
-
-
-
+/**
+ * Main Favs container component renders fav shows or movies if user is logged in or 
+ * a redirect-to-login option if user is signed out
+ * @param {} param0 path to the current page "/favs" to be passed down to the Usernavbar to highlight the corresponding icon
+ * @returns 
+ */
 export default function Favs({currentPath}) {
   const [loggedIn, setLoggedIn] = useState(false)
+  const [movies, setMovies] = useState(true)
+
+  const selectDataType = (e)=>{
+    setMovies(e.target.value === 'movies')
+  }
   useEffect(() => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -133,7 +217,11 @@ export default function Favs({currentPath}) {
   return (
     <div className='favs'>
       <Header title={"Favs"}/> 
-      { loggedIn ? <LoggedInFavs/> : <LoggedOutFavs/>}
+      <div className="tabHeader">
+          <button value="movies" onClick={(e)=>{selectDataType(e)}} className={`moviesHeader ${movies ? 'selected' : 'deselected'}`}>Movies</button>
+          <button  value="series" onClick={(e)=>{selectDataType(e)}} className={`seriesHeader ${movies ? 'deselected' : 'selected'}`}>TV Series</button>
+        </div>
+      { loggedIn ? <LoggedInFavs showMovies={movies}/> : <LoggedOutFavs/>}
       <UserNavbar currentPath={currentPath}/>
     </div>
   )

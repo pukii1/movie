@@ -5,7 +5,7 @@ import LoadingWaves from '../LoadingWaves'
 import {AiFillStar} from "react-icons/ai"
 import { BsFillBookmarkHeartFill } from 'react-icons/bs'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { likeMovie } from '../../services/movieService'
+import { likeMovie, likeTVSeries } from '../../services/movieService'
 
 export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx}) {
 
@@ -83,6 +83,21 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
     }
   }
 
+  const addToFavs = ()=>{
+    //check if item is show or movie
+    if(data.titleType.isSeries){
+      favSeries();
+    }
+    else{
+      favMovie()
+    }
+  }
+
+  const favSeries = ()=>{
+    const auth = getAuth()
+    const user = auth.currentUser
+    likeTVSeries(user.uid, data)
+  }
   const favMovie = ()=>{
     const auth = getAuth();
     const user = auth.currentUser
@@ -105,7 +120,7 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
         alt={imgAlt}
       />
   }
-      { allowLike && (rotationIndex == 1) && <span className="likeHeart" onClick={favMovie}><BsFillBookmarkHeartFill/></span>}
+      { allowLike && (rotationIndex == 1) && <span className="likeHeart" onClick={addToFavs}><BsFillBookmarkHeartFill/></span>}
       { rotationIndex == 1 && <p className="mainTitle">{data.originalTitleText.text}</p>}
       <div className="bottomTab">
         <p className="title">{data.originalTitleText.text.toUpperCase()}</p>

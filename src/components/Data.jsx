@@ -60,8 +60,8 @@ export default function Data() {
   return (
     <div className="data">
       <div className="tabHeader">
-          <button value="movies" onClick={(e)=>{selectDataType(e)}} className={`loginHeader ${movies ? 'selected' : 'deselected'}`}>Movies</button>
-          <button  value="series" onClick={(e)=>{selectDataType(e)}} className={`signUpHeader ${movies ? 'deselected' : 'selected'}`}>TV Series</button>
+          <button value="movies" onClick={(e)=>{selectDataType(e)}} className={`moviesHeader ${movies ? 'selected' : 'deselected'}`}>Movies</button>
+          <button  value="series" onClick={(e)=>{selectDataType(e)}} className={`seriesHeader ${movies ? 'deselected' : 'selected'}`}>TV Series</button>
         </div>
         <div className="navigation">
             
