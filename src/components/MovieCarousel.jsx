@@ -9,7 +9,6 @@ export default function MovieCarousel({data}) {
     const [translateX, setTranslateX] = useState(0);
     const [renderMovies, setRenderMovies] = useState(true)
     const numMovies = data?.length; 
-    //[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     const [displayIdxs, setDisplayIdxs] = useState([0, 1, 2])
     const keys = [0,1,2]
     const rotateLeft = ()=>{

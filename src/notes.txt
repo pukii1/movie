@@ -37,7 +37,11 @@
 - added movie/series separation on Favs page (LoggedInFavs) + added 'NoLikesYet' comp to render msg to user if no movies/series have been liked yet
   + redirect-to-homepage option 
 - impl. movies/series separation in DB + cache (added respective functions to 'movieService')
+- removed redundant Dashboard wrapper around (prev) Data comp (now 'Home') + added return-to-home button to movie selection displays ('popular', 'see all')
+- made Header title respond to current tab (i.e. movies vs tv-series, home vs popular vs see all)
+  + can now toggle between 'Home', 'Popular Movies', 'Popular TV Series', 'All Movies', 'All TV Series' accordingly
 
+  
 TODO: fix redirect arrow position in Favs>NoLikesYet
 TODO: divide Favs into movies + tv series, similar UI to the homepage ("/"), implement movies/tv-series separation in DB + cache too DONE
 TODO: add design credits DONE

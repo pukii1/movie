@@ -15,10 +15,21 @@
             background: transparent;
             color: $white;
 
+            &.returnToCarousel{
+                font-size:1.5em;
+                color: $pink;
+                flex-basis: 70%;
+                text-align: start;   
+
+                
+            }
             &.popular{
                 font-size: 1.5em;
                 font-weight: bolder;
 
+                &.selected {
+                    color: $pink;
+                }
                 &:hover {
                     color: $pink;
                 }
@@ -28,6 +39,9 @@
                 color: $pink;
                 display: flex;
                 align-items: center;
+                &.selected{
+                    font-weight: bolder;
+                }
             }
 
             &:hover{

@@ -3,7 +3,7 @@ import { getAuth, onAuthStateChanged, setPersistence, browserSessionPersistence 
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import Auth from './components/Auth';
-import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import SplashScreen from './components/SplashScreen';
@@ -75,7 +75,7 @@ useEffect(()=>{
   return (
     <div className="App">
       <Router>
-      <PrivateRoute path="/" component={Dashboard} isAuthenticated={isAuthenticated} />
+      <PrivateRoute path="/" component={Home} isAuthenticated={isAuthenticated} />
         <PublicRoute path="/login" component={Auth} isAuthenticated={isAuthenticated} />
       </Router>
       

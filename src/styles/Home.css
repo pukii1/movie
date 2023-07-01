@@ -14,9 +14,18 @@
   background: transparent;
   color: #ffffff;
 }
+.data .navigation button.returnToCarousel {
+  font-size: 1.5em;
+  color: #FC4A78;
+  flex-basis: 70%;
+  text-align: start;
+}
 .data .navigation button.popular {
   font-size: 1.5em;
   font-weight: bolder;
+}
+.data .navigation button.popular.selected {
+  color: #FC4A78;
 }
 .data .navigation button.popular:hover {
   color: #FC4A78;
@@ -26,6 +35,9 @@
   color: #FC4A78;
   display: flex;
   align-items: center;
+}
+.data .navigation button.seeAll.selected {
+  font-weight: bolder;
 }
 .data .navigation button:hover {
   cursor: pointer;
@@ -60,4 +72,4 @@
 .data .tabHeader button.selected {
   border-bottom: 1px solid #FC4A78;
   opacity: 100%;
-}/*# sourceMappingURL=Data.css.map */
+}/*# sourceMappingURL=Home.css.map */
