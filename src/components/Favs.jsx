@@ -48,13 +48,15 @@ const LoggedInFavs = ({showMovies})=>{
     const auth = getAuth();
     const userId = auth.currentUser.uid
     let likedMovies = await getLikedMovies(userId)
-    console.log(likedMovies)
     setLikedMovies(likedMovies)
   }
  useEffect(()=>{
-  if(likedMovies == null) {
-    glMovies()
+  if(showMovies){
+    if(likedMovies == null) {
+      glMovies()
+    }
   }
+  setDisplayFavMovies(likedMovies !== null && likedMovies.length != 0)    
  }, [])
 
 
@@ -63,19 +65,19 @@ const LoggedInFavs = ({showMovies})=>{
     const auth = getAuth();
     const userId = auth.currentUser.uid
     let likedSeries = await getLikedSeries(userId)
-    console.log(likedSeries)
-    setLikedMovies(likedSeries)
+    setLikedSeries(likedSeries)
   }
  useEffect(()=>{
+  console.log("rerendered LoggedInFavs")
   if(!showMovies){
     if(likedSeries == null){
       glSeries()
     }
   }
- }, [showMovies])
+  setDisplayFavSeries(likedSeries !== null && likedSeries.length != 0)
+ }, [])
 
-
- //update list of liked movies in real-time by listening to db-changes
+//update list of liked movies in real-time by listening to db-changes
  useEffect(()=>{
   const auth = getAuth()
   const user = auth.currentUser
@@ -93,7 +95,7 @@ const LoggedInFavs = ({showMovies})=>{
         //update likedMovies
         setLikedMovies(updatedLikedMovies)
         console.log(`updated liked movies: `)
-        console.log(updatedLikedMovies.join(", "))
+        console.log(updatedLikedMovies)
       }
       else {
         //TODO handle this
@@ -112,7 +114,7 @@ const LoggedInFavs = ({showMovies})=>{
         //update likedMovies
         setLikedSeries(updatedLikedSeries)
         console.log(`updated liked movies: `)
-        console.log(updatedLikedSeries.join(", "))
+        console.log(updatedLikedSeries)
       }
       else {
         //TODO handle this
@@ -129,21 +131,6 @@ const LoggedInFavs = ({showMovies})=>{
   
  }, [])
 
- //check if there are any favs (movies or shows), if true -> set displayFavs flag to true
- useEffect(()=>{
-  if(showMovies){
-    console.log(likedMovies)
-    setDisplayFavMovies(likedMovies !== null && likedMovies.length != 0)    
-  } else {
-    console.log(likedSeries)
-    console.log(`show movies: ${showMovies}, displayFavSeries: ${displayFavSeries}`)
-    setDisplayFavSeries(likedSeries !== null && likedSeries.length != 0)
-  }
-  
- }, [likedMovies, likedSeries])
-
-
-  
 
   
 
@@ -153,7 +140,6 @@ const LoggedInFavs = ({showMovies})=>{
       <div className="movieContainer">
         { showMovies && displayFavMovies && likedMovies.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
             })}
-
         { !showMovies && displayFavSeries && likedSeries.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
             })}
         { (!showMovies && !displayFavSeries) && <NoLikesYet movies={showMovies}/>}

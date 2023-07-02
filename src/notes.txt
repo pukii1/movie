@@ -41,7 +41,11 @@
 - made Header title respond to current tab (i.e. movies vs tv-series, home vs popular vs see all)
   + can now toggle between 'Home', 'Popular Movies', 'Popular TV Series', 'All Movies', 'All TV Series' accordingly
 
+- refactored the liked-movies/liked-tv-series fetching functions in movieService.js + added cache-fetching if liked-media has been cached b4 querying the db 
+  to improve performance and remove redundancy, also updated the fetching functions in Favs>LoggedInFavs
   
+TODO: rework movie-fetching for movieCarousel -> fetch 10 movies at a time, cache said movies, add refresh button to allow user to fetch new batch 
+      GOAL: prevent excessive api calls + prevent user from potentially 'losing' a movie of interest to accidental page refresh/navigation etc.
 TODO: fix redirect arrow position in Favs>NoLikesYet
 TODO: divide Favs into movies + tv series, similar UI to the homepage ("/"), implement movies/tv-series separation in DB + cache too DONE
 TODO: add design credits DONE

@@ -81,14 +81,23 @@ export const likeMovie = async (userId, movieData)=>{
 
     //user already has a "favs" document
     if (userDocSnap.exists()) {
-        console.log("db exists")
-        // Document exists, check if the movieId is in the favMovies array
-        const favMovies = userDocSnap.data().favMovies;
-        if (!favMovies.some((mv)=> mv.id == movieData.id)) {
-            addMovieToDB(userDocRef, movieData)
-        } else {
-            removeMovieFromDB(userDocRef, movieData); 
+        //check if user already has a "favMovies" entry
+        if(userDocSnap.data().favMovies){
+            console.log("favMovies entry exists")
+            // Document exists, check if the movieId is in the favMovies array
+            const favMovies = userDocSnap.data().favMovies;
+            if (!favMovies.some((mv)=> mv.id == movieData.id)) {
+                addMovieToDB(userDocRef, movieData)
+            } else {
+                removeMovieFromDB(userDocRef, movieData); 
+            }
+
         }
+        //user doesnt already have a "favMovies entry"
+        else {
+            addMovieToDB(userDocRef, movieData)
+        }
+        
     } 
     //user doesnt already have "favs" document -> create new doc
     else {
@@ -101,19 +110,27 @@ export const likeMovie = async (userId, movieData)=>{
 }
 
 export const getLikedMovies = async (userId) =>{
-    //reference desired doc
-    const userDocRef = doc(db, "favs", userId);
-    
-    // Retrieve the user doc from favs-collection
-    const userDocSnap = await getDoc(userDocRef);
+    const cachedLikedMovies = getCachedLikedMovies(userId)
+    if(cachedLikedMovies == null){
+        //reference desired doc
+        const userDocRef = doc(db, "favs", userId);
+            
+        // Retrieve the user doc from favs-collection
+        const userDocSnap = await getDoc(userDocRef);
 
-    //check if doc exists
-    if (userDocSnap.exists()) {
-        // return the favMovies entry
-        return userDocSnap.data().favMovies;
+        //check if doc exists
+        if (userDocSnap.exists()) {
+            console.log("fetched liked Movies from DB")
+            // return the favMovies entry
+            return userDocSnap.data().favMovies;
+        }
+        //doc doesnt exist -> return null
+        return null;
+    } else {
+        console.log("fetched liked Movies from cache")
+        return cacheLikedMovies
     }
-    //doc doesnt exist -> return null
-    return null;
+    
 }
 
 
@@ -167,37 +184,52 @@ export const likeTVSeries = async (userId, seriesData)=>{
 
     //user already has a "favs" document
     if (userDocSnap.exists()) {
-        console.log("db exists")
-        // Document exists, check if the movieId is in the favMovies array
-        const favSeries = userDocSnap.data().favTVSeries;
-        if (!favSeries.some((sr)=> sr.id == seriesData.id)) {
-            addSeriesToDB(userDocRef, seriesData)
-        } else {
-            removeSeriesFromDB(userDocRef, seriesData); 
+        if(userDocSnap.data().favTVSeries){
+            console.log("favTVSeries entry exists")
+            // Document exists, check if the movieId is in the favMovies array
+            const favSeries = userDocSnap.data().favTVSeries;
+            if (!favSeries.some((sr)=> sr.id == seriesData.id)) {
+                addSeriesToDB(userDocRef, seriesData)
+            } else {
+                removeSeriesFromDB(userDocRef, seriesData); 
+            }
         }
+        //user doesnt already have "favTVSeries" entry in "favs" document -> create new doc
+        else {
+            addSeriesToDB(userDocRef, seriesData)
+        }
+       
     } 
     //user doesnt already have "favs" document -> create new doc
     else {
         createDocAddSeriesToDB(userId, seriesData);
     }
+    
 
     //update cache accordingly
-    const likedSrs = await getLikedTVSeries(userId);
+    const likedSrs = await getLikedSeries(userId);
     cacheLikedTVSeries(userId, likedSrs)
 }
 
 export const getLikedSeries = async (userId) =>{
-    //reference desired doc
-    const userDocRef = doc(db, "favs", userId);
-    
-    // Retrieve the user doc from favs-collection
-    const userDocSnap = await getDoc(userDocRef);
+    const cachedLikedSeries = getCachedLikedTVSeries(userId);
+    if(cachedLikedSeries == null){
+        //reference desired doc
+        const userDocRef = doc(db, "favs", userId);
+            
+        // Retrieve the user doc from favs-collection
+        const userDocSnap = await getDoc(userDocRef);
 
-    //check if doc exists
-    if (userDocSnap.exists()) {
-        // return the favTVSeries entry
-        return userDocSnap.data().favTVSeries;
+        //check if doc exists
+        if (userDocSnap.exists()) {
+            console.log("fetched liked series from DB")
+            // return the favTVSeries entry
+            return userDocSnap.data().favTVSeries;
+        }
+        //doc doesnt exist -> return null
+        return null;
+    } else {
+        console.log("fetched liked series from cache")
+        return cachedLikedSeries;
     }
-    //doc doesnt exist -> return null
-    return null;
 }
