@@ -11,7 +11,6 @@ import UserNavbar from './sharedComponents/UserNavbar.jsx';
 
 export default function Home({currentPath}) {
     const [movies, setDataType] = useState(true)
-    const [data, setData] = useState(null)
     const [showPopular, setShowPopular] = useState(false)
     const [seeAll, setSeeAll] = useState(false)
     const [ highlightReturn, setHighlightReturn] = useState(false)
@@ -20,37 +19,8 @@ export default function Home({currentPath}) {
     const selectDataType = (e)=>{
         setDataType(()=> e.target.value == "movies" )
     }
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(true);
-    const randomUrl = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies'
-    const randomSeriesUrl =  'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_series';
-    const [fetchUrl, setFetchUrl] = useState(randomUrl);
-    const host = 'moviesdatabase.p.rapidapi.com'
-    const apiKey = 'f9e45181a3msh422b41bfbdd3bdbp127d70jsndf222028a016'
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': apiKey,
-        'X-RapidAPI-Host': host
-      }
-    };
-  const fetchData = async ()=>{
-    try {
-      const response = await fetch(fetchUrl, options);
-      const result = await response.json();
-      setData(result.results);
-      setLoading(false)
-      console.log(result.results);
-    } catch (error) {
-      setLoading(false)
-      setError(error.message)
-    }
-  }
+    
   useEffect(()=>{
-    fetchData();
-  }, [])
-  useEffect(()=>{
-    setFetchUrl(()=> movies ? randomUrl : randomSeriesUrl)
     if(showPopular){
       setTitle(`Popular ${movies ? 'Movies' : 'TV Series'}`)
     }
@@ -58,19 +28,6 @@ export default function Home({currentPath}) {
       setTitle(`All ${movies ? 'Movies' : 'TV Series'}`)
     }
   }, [movies])
-
-  useEffect(()=>{
-    fetchData();
-  }, [fetchUrl])
-  
-  useEffect(()=>{
-    if(data){
-      setLoading(false)
-      console.log("data changed")
-    } else {
-      setLoading(true)
-    }
-  }, [data])
 
   const toggleShowPopular = () => { 
     setTitle(`Popular ${movies ? 'Movies' : 'TV Series'}`)
@@ -124,20 +81,9 @@ export default function Home({currentPath}) {
               </>
             }
         </div>
-        
-        {error ? <div className="error">An error occured, unfortunately we couldnt fetch any movies.</div>: 
-                 <>
-                 {loading ? <div className="loading">Loading...</div> : 
-                    <>
-                      { !showSelection && <MovieCarousel data={data}/>}
-                      { showSelection && <MovieSelection mediaType={movies} popular={showPopular}/>}
-                    </>
-                 }    
-                 </>
-        }
-      
-
-      
+              { !showSelection && <MovieCarousel movies={movies}/>}
+              { showSelection && <MovieSelection mediaType={movies} popular={showPopular}/>}
+         
       <UserNavbar currentPath={currentPath}/>
     </div>
   )
