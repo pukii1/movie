@@ -49,15 +49,25 @@ const LoggedInFavs = ({showMovies})=>{
     const userId = auth.currentUser.uid
     let likedMovies = await getLikedMovies(userId)
     setLikedMovies(likedMovies)
+    console.log(likedMovies)
+    setDisplayFavMovies(likedMovies !== null && likedMovies.length != 0)    
   }
  useEffect(()=>{
+  console.log("rendering LoggedInFavs")
   if(showMovies){
     if(likedMovies == null) {
       glMovies()
+    } else {
+      setDisplayFavMovies(likedMovies.length != 0)        
+    }
+  } else {
+    if(likedSeries == null){
+      glSeries()
+    } else {
+      setDisplayFavSeries(likedSeries.length != 0)    
     }
   }
-  setDisplayFavMovies(likedMovies !== null && likedMovies.length != 0)    
- }, [])
+ }, [showMovies])
 
 
    //get liked tvSeries from cache or db if not stored in cache yet  
@@ -66,16 +76,10 @@ const LoggedInFavs = ({showMovies})=>{
     const userId = auth.currentUser.uid
     let likedSeries = await getLikedSeries(userId)
     setLikedSeries(likedSeries)
+    console.log(likedSeries)
+    setDisplayFavSeries(likedSeries !== null && likedSeries.length != 0)
   }
- useEffect(()=>{
-  console.log("rerendered LoggedInFavs")
-  if(!showMovies){
-    if(likedSeries == null){
-      glSeries()
-    }
-  }
-  setDisplayFavSeries(likedSeries !== null && likedSeries.length != 0)
- }, [])
+
 
 //update list of liked movies in real-time by listening to db-changes
  useEffect(()=>{
@@ -131,16 +135,19 @@ const LoggedInFavs = ({showMovies})=>{
   
  }, [])
 
-
+useEffect(()=>{
+  console.log(`display fav movies: ${displayFavMovies}`)
+  console.log(`display fav series: ${displayFavSeries}`)
+}, [displayFavMovies, displayFavSeries])
   
 
 
   return (
     <div className='liFavs'>
       <div className="movieContainer">
-        { showMovies && displayFavMovies && likedMovies.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
+        { showMovies && displayFavMovies && likedMovies && likedMovies.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
             })}
-        { !showMovies && displayFavSeries && likedSeries.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
+        { !showMovies && displayFavSeries && likedSeries && likedSeries.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
             })}
         { (!showMovies && !displayFavSeries) && <NoLikesYet movies={showMovies}/>}
         { ( showMovies && !displayFavMovies) && <NoLikesYet movies={showMovies}/>}

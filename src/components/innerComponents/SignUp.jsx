@@ -23,6 +23,7 @@ export default function SignUp() {
   const [passWordErrorTxt, setPasswordErrorTxt] = useState("")
   const [addPasswordErrorClass, setAddPasswordErrorClass] = useState(false)
   const [weakPassword, setWeakPassword] = useState(false)
+  const [networkError, setNetworkError] = useState(false)
 
   const signUpErrorHandling = (errCode)=>{
     console.log(errCode)
@@ -30,7 +31,9 @@ export default function SignUp() {
       case "auth/email-already-in-use":
         setUserAlreadyExists(true);
         break;
-      
+      case "auth/network-error":
+        setNetworkError(true)
+        break;
       case "auth/invalid-email":
         setInvalidEmail(true);
         break;
@@ -79,6 +82,7 @@ export default function SignUp() {
     .then((userCredential) => {
       // Signed in 
       setUserAlreadyExists(false)
+      setNetworkError(false)
       setUser(userCredential.user);
     })
     .catch((error) => {
@@ -110,6 +114,9 @@ export default function SignUp() {
 
   return (
     <div className="signUp">
+      { networkError && <div><p>Sorry u cant sign up atm</p><p>A network error occured...</p></div>}
+      {!networkError && 
+      <>
         <label htmlFor="emailInput">Email</label>
         <input 
           className={`inputField ${addEmailErrorClass ? 'emailError' : ''}`}
@@ -137,7 +144,7 @@ export default function SignUp() {
         </button>
         
         <GoogleSignIn setUser={setUser}/>
-
+        </>}
     </div>
   )
 }

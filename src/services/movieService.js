@@ -120,15 +120,18 @@ export const getLikedMovies = async (userId) =>{
 
         //check if doc exists
         if (userDocSnap.exists()) {
-            console.log("fetched liked Movies from DB")
-            // return the favMovies entry
-            return userDocSnap.data().favMovies;
+            let favMovies = userDocSnap.data().favMovies;
+            if(favMovies !== undefined){
+                console.log("fetched liked Movies from DB")
+                // return the favMovies entry
+                return userDocSnap.data().favMovies;
+            }
         }
         //doc doesnt exist -> return null
         return null;
     } else {
         console.log("fetched liked Movies from cache")
-        return cacheLikedMovies
+        return cachedLikedMovies
     }
     
 }
@@ -212,6 +215,7 @@ export const likeTVSeries = async (userId, seriesData)=>{
 }
 
 export const getLikedSeries = async (userId) =>{
+    console.log("fetching series.....")
     const cachedLikedSeries = getCachedLikedTVSeries(userId);
     if(cachedLikedSeries == null){
         //reference desired doc
@@ -222,9 +226,12 @@ export const getLikedSeries = async (userId) =>{
 
         //check if doc exists
         if (userDocSnap.exists()) {
-            console.log("fetched liked series from DB")
-            // return the favTVSeries entry
-            return userDocSnap.data().favTVSeries;
+            let favSeries = userDocSnap.data().favTVSeries
+            if(favSeries !== undefined){
+                console.log("fetched liked series from DB")
+                // return the favTVSeries entry
+                return userDocSnap.data().favTVSeries;
+            }
         }
         //doc doesnt exist -> return null
         return null;

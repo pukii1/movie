@@ -24,7 +24,8 @@ export default function Login() {
   const [addEmailErrorClass, setAddEmailErrorClass] = useState(false)
   const [emailErrorTxt, setEmailErrorTxt] = useState("")
   const [invalidEmail, setInvalidEmail] = useState(false);
-  
+  const [networkError, setNetworkError] = useState(false)
+
   const loginErrorHandling = (errCode)=>{
     console.log(errCode)
     switch(errCode){
@@ -36,6 +37,9 @@ export default function Login() {
         break;
       case "auth/invalid-email":
         setInvalidEmail(true);
+        break;
+      case "auth/network-request-failed":
+        setNetworkError(true)
         break;
     }
   }
@@ -74,6 +78,11 @@ export default function Login() {
   }, [wrongPwd])
 
 
+  useEffect(()=>{
+    if(networkError){
+
+    }
+  }, [networkError])
   
   useEffect(()=>{
     console.log(error)
@@ -85,6 +94,7 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, pwd)
     .then((userCredential) => {
       // Signed in 
+      setNetworkError(false)
       setUser(userCredential.user);
       Navigate("/")
       
@@ -120,6 +130,11 @@ export default function Login() {
 
   return (
     <div className="login">
+
+
+
+      {networkError && <div><p>Sorry u cant login atm</p><p>A network error occured...</p></div>}
+      { !networkError && <>
        <label htmlFor="emailInput">Email</label>
         <input 
           className={`inputField ${addEmailErrorClass ? 'emailError' : ''}`}
@@ -150,7 +165,7 @@ export default function Login() {
           <GoogleSignIn setUser={setUser}/>
           <button onClick={resetPwd} className="btnContainer forgotPwd">Forgot Password?</button>
         </div>
-        
+      </>}
     </div>
   )
 }
