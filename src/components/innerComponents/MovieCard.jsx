@@ -7,7 +7,7 @@ import { BsFillBookmarkHeartFill } from 'react-icons/bs'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { likeMovie, likeTVSeries } from '../../services/movieService'
 
-export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx}) {
+export default function MovieCard({data, lastMovie, rotationIndex, rotate}) {
 
 
   const [imgSrc, setImgSrc] = useState(null)
@@ -16,6 +16,7 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
   const [loadingImg, setLoadingImg] = useState(true)
   const [ratingsLoaded, setRatingsLoaded] = useState(false)
   const [allowLike, setAllowLike] = useState(false)
+ 
   const ratingsUrl = `https://moviesdatabase.p.rapidapi.com/titles/${data.id}/ratings`;
   const ratingsApiKey = 'f9e45181a3msh422b41bfbdd3bdbp127d70jsndf222028a016';
   const host =  'moviesdatabase.p.rapidapi.com' 
@@ -40,13 +41,13 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
     }, []);
   }
   useEffect(() => {
-    if (data) {
+    if (data.primaryImage) {
       setImgSrc(data.primaryImage?.url);
       setImgAlt(data.primaryImage?.caption.plainText);
       setLoadingImg(true)
       fetchRatings()
     }
-  }, [data]);
+  }, [data.primaryImage]);
 
   const options = {
     method: 'GET',
@@ -121,9 +122,9 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate, idx})
       />
   }
       { allowLike && (rotationIndex == 1) && <span className="likeHeart" onClick={addToFavs}><BsFillBookmarkHeartFill/></span>}
-      { rotationIndex == 1 && <p className="mainTitle">{data.originalTitleText.text}</p>}
+      { rotationIndex == 1 && <p className="mainTitle">{data.titleText.text}</p>}
       <div className="bottomTab">
-        <p className="title">{data.originalTitleText.text.toUpperCase()}</p>
+        <p className="title">{data.titleText.text.toUpperCase()}</p>
         <p className="yr">{data.releaseYear?.year}</p>
         {ratingsLoaded && 
           <p className="rating">

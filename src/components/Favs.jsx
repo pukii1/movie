@@ -145,9 +145,23 @@ useEffect(()=>{
   return (
     <div className='liFavs'>
       <div className="movieContainer">
-        { showMovies && displayFavMovies && likedMovies && likedMovies.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
+        { showMovies && displayFavMovies && likedMovies && 
+            likedMovies.map((mv, i)=> {
+              return <MovieCard 
+                        data={mv}
+                        key={i} 
+                        lastMovie={null} 
+                        rotate={null} 
+                        rotationIndex={1}/>
             })}
-        { !showMovies && displayFavSeries && likedSeries && likedSeries.map((mv, i)=> {return <MovieCard key={i} data={mv} lastMovie={null} rotate={null} rotationIndex={1}/>
+        { !showMovies && displayFavSeries && likedSeries && 
+            likedSeries.map((mv, i)=> {
+              return <MovieCard 
+                        data={mv}
+                        key={i}  
+                        lastMovie={null} 
+                        rotate={null} 
+                        rotationIndex={1}/>
             })}
         { (!showMovies && !displayFavSeries) && <NoLikesYet movies={showMovies}/>}
         { ( showMovies && !displayFavMovies) && <NoLikesYet movies={showMovies}/>}

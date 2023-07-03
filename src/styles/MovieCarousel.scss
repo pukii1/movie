@@ -1,4 +1,4 @@
-@import "./colors";
+@import "./_colors.scss";
 
 .movieCarousel {
     color: $white;
@@ -7,6 +7,28 @@
     margin: 0 auto;
     flex-wrap: wrap;
 
+    .reload{
+        flex-basis: 100%;
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        .buttonReload{
+            opacity: 70%;
+            align-items: center;
+            display: flex;
+            padding: 5px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: none;
+            background-color: $pink;
+            color: $darkPurple;
+
+            &:hover{
+                cursor: pointer;
+                opacity: 100%;
+            }
+        }
+    }
     .movieContainer{
         display: flex;
         justify-content: center;

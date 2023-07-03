@@ -7,6 +7,27 @@
   margin: 0 auto;
   flex-wrap: wrap;
 }
+.movieCarousel .reload {
+  flex-basis: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+.movieCarousel .reload .buttonReload {
+  opacity: 70%;
+  align-items: center;
+  display: flex;
+  padding: 5px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: #FC4A78;
+  color: #1F2034;
+}
+.movieCarousel .reload .buttonReload:hover {
+  cursor: pointer;
+  opacity: 100%;
+}
 .movieCarousel .movieContainer {
   display: flex;
   justify-content: center;

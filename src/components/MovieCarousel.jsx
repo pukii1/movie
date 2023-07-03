@@ -4,6 +4,8 @@ import "../styles/MovieCarousel.scss"
 import MovieCard from './innerComponents/MovieCard'
 import { BiSolidChevronLeft } from 'react-icons/bi'
 import { BiSolidChevronRight } from 'react-icons/bi'
+import {TbReload} from "react-icons/tb"
+
 
 export default function MovieCarousel({movies}) {
     const [translateX, setTranslateX] = useState(0);
@@ -12,7 +14,9 @@ export default function MovieCarousel({movies}) {
     const [displayIdxs, setDisplayIdxs] = useState([0, 1, 2])
     const keys = [0,1,2]
 
-    const [data, setData] = useState(null)
+    const [fetchedMovies, setFetchedMovies] = useState(null)
+    const [fetchedSeries, setFetchedSeries] = useState(null)
+
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true);
     const randomUrl = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies'
@@ -31,7 +35,11 @@ export default function MovieCarousel({movies}) {
     try {
       const response = await fetch(fetchUrl, options);
       const result = await response.json();
-      setData(result.results);
+      if(movies){
+        setFetchedMovies(result.results)
+      } else {
+        setFetchedSeries(result.results)
+      }
       setLoading(false)
       console.log(result.results);
     } catch (error) {
@@ -52,14 +60,20 @@ export default function MovieCarousel({movies}) {
   }, [fetchUrl])
   
   useEffect(()=>{
-    if(data){
-      setNumMovies(data.length)
+    if(fetchedMovies){
+      setNumMovies(fetchedMovies.length)
       setLoading(false)
-      console.log("data changed")
     } else {
       setLoading(true)
     }
-  }, [data])
+    if(fetchedSeries){
+      setNumMovies(fetchedSeries.length)
+      setLoading(false)
+    }
+
+    console.log(fetchedMovies)
+    console.log(fetchedSeries)
+  }, [fetchedMovies, fetchedSeries])
 
     //rotate carousel to the left
     const rotateLeft = ()=>{
@@ -76,6 +90,10 @@ export default function MovieCarousel({movies}) {
     }
 
 
+    //fetch new media button click event handler to get new batch of random movies/series
+    const fetchNewMedia = ()=>{
+      console.log("fetch new media")
+    }
     useEffect(()=>{
         setRenderMovies(true)
         console.log(displayIdxs)
@@ -87,23 +105,32 @@ export default function MovieCarousel({movies}) {
 
       {loading && <div className="loading">Loading...</div>}
       
-      {!loading && !data && <div>No data...</div>}
+      { movies && !loading && !fetchedMovies && <div>No movies...</div>}
+      { !movies && !loading && !fetchedSeries && <div>No tv series...</div>}
       
       {error && <div className="error">An error occured, unfortunately we couldnt fetch any movies.</div>}
       
       
       
-      { data && <div className="movieContainer" style={{'transform' : `translateX${translateX}`}}>
-        {renderMovies && displayIdxs.map((idx, index) => (
-          <MovieCard 
-            data={data[idx]} 
-            idx={displayIdxs[idx]} 
-            rotationIndex={keys[index]} 
-            rotate={index == 0 ? rotateLeft : (index == 2 ? rotateRight : null)}
-            lastMovie={index === displayIdxs.length - 1}
-            key={idx} />)
-        )}
-      </div>}
+      {/*{ (movies && fetchedMovies) || (!movies && fetchedSeries) &&*/}
+      <>
+        <div className="movieContainer" >
+          
+        {renderMovies && displayIdxs.map((displayIdx, index) => (
+          (movies && fetchedMovies !== null && fetchedMovies[displayIdx]) || (!movies && fetchedSeries !== null && fetchedSeries[displayIdx]) ? (
+            <MovieCard 
+              data = { movies ? fetchedMovies[displayIdx] : fetchedSeries[displayIdx]}
+              rotationIndex={keys[index]}
+              rotate={index === 0 ? rotateLeft : (index === 2 ? rotateRight : null)}
+              lastMovie={index === displayIdxs.length - 1}
+              key={displayIdx}
+            />
+          ) : null
+        ))}
+          
+        </div>
+        </>
+      {/*}}*/}
     
       <div className="carouselNavigation">
         {renderMovies && <>
@@ -112,6 +139,8 @@ export default function MovieCarousel({movies}) {
         </>}
         
       </div>
+      <div className="reload"><button onClick={fetchNewMedia} className="buttonReload"><TbReload/></button></div> 
+
     </div>
   )
 }
