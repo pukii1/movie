@@ -69,7 +69,7 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate}) {
   }
   const handleImgLoad = ()=>{
     setLoadingImg(false)
-    console.log("img loaded")
+    //console.log("img loaded")
   }
 
 

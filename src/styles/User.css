@@ -1,0 +1,54 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.user .liUser {
+  margin: 80px auto 0 auto;
+  width: 60%;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user .liUser .imgContainer {
+  border-radius: 50%;
+}
+.user .liUser .imgContainer .profilePic {
+  width: 200px;
+}
+.user .liUser .imgContainer .profileIconContainer {
+  position: relative;
+}
+.user .liUser .imgContainer .profileIconContainer .profileIcon {
+  color: #7275A6;
+  font-size: 6em;
+}
+.user .liUser .imgContainer .profileIconContainer .changePicIcon {
+  position: absolute;
+  right: 10px;
+  top: 70px;
+}
+.user .liUser .imgContainer .profileIconContainer .changePicIcon:hover {
+  cursor: pointer;
+  color: #FC4A78;
+}
+.user .liUser .metaData {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+.user .liUser .metaData .metaSection {
+  margin-top: 20px;
+  flex-basis: 100%;
+  border-bottom: 1px solid #7275A6;
+}
+.user .liUser .metaData .metaSection .descr {
+  color: #7275A6;
+  font-size: 0.7em;
+  margin-bottom: 0;
+}
+.user .liUser .metaData .metaSection .value {
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: #D3D3DD;
+  margin-bottom: 0;
+}/*# sourceMappingURL=User.css.map */

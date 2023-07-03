@@ -53,11 +53,9 @@
   Fetch errors get passed down into the calling functions and catched by the catch portion of a dedicated try/catch block) 
   and have the data persist even when the user navigates to diff pages etc.
   user can now manually refresh the carousel and fetch a new batch of 10 movies or series via clicking a button
-
-
-
-
-
+- added some ui to User page and added inner comp LoggedInUser displayed when user is logged in   
+  
+TODO: impl change user pic handler function
 TODO: reset Pwd + continue working on user/profile page layout
 TODO: add comments!!!
 TODO: rework movie-fetching for movieCarousel -> fetch 10 movies at a time, cache said movies, add refresh button to allow user to fetch new batch 

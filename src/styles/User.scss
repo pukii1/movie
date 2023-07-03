@@ -1,0 +1,66 @@
+@import "./colors.scss";
+
+.user {
+    .liUser{
+        margin: 80px auto 0 auto;        
+        width: 60%;
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .imgContainer{
+            border-radius: 50%;
+
+            .profilePic{
+                width: 200px;
+            }
+
+            .profileIconContainer{
+                position: relative;
+                .profileIcon{
+                    color: $purple;
+                    font-size: 6em; 
+                }
+                .changePicIcon{
+                    position: absolute;
+                    right: 10px;
+                    top: 70px; 
+
+                    &:hover{
+                        cursor: pointer;
+                        color: $pink;
+                    }
+                }
+            }
+            
+
+            
+        }
+
+
+        .metaData{
+            display: flex;
+            justify-content: start;
+            flex-wrap: wrap;
+            .metaSection{
+                margin-top: 20px;
+                
+                flex-basis: 100%;
+                border-bottom: 1px solid $purple;
+                .descr{
+                    color: $purple;
+                    font-size: .7em;
+                    margin-bottom: 0;
+                }
+                .value{
+                    font-size: .8em;
+                    margin-top: 5px;
+                    color: $grey;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
