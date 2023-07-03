@@ -240,3 +240,70 @@ export const getLikedSeries = async (userId) =>{
         return cachedLikedSeries;
     }
 }
+
+
+//random movie/series carousel functions
+//get random movies/series from cache
+export const getRandomMoviesFromCache = ()=>{
+    const cacheKey = `randomMovies`;
+    const cachedData = localStorage.getItem(cacheKey);
+    return cachedData ? JSON.parse(cachedData) : null
+}
+export const getRandomSeriesFromCache = ()=>{
+    const cacheKey = `randomSeries`;
+    const cachedData = localStorage.getItem(cacheKey);
+    //return null if cahcedData isnt found, null or undefined
+    return cachedData ? JSON.parse(cachedData) : null
+}
+
+
+
+
+
+
+
+const randomMoviesUrl = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies'
+const randomSeriesUrl =  'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_series';
+const host = 'moviesdatabase.p.rapidapi.com'
+const apiKey = 'f9e45181a3msh422b41bfbdd3bdbp127d70jsndf222028a016'
+const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': apiKey,
+    'X-RapidAPI-Host': host
+  }
+};
+const fetchData = async (url)=>{
+    try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    console.log(result.results);
+    return result.results;
+    } catch (error) {
+        return new Error("error fetching from " + url)
+    }
+}
+//get random movies/series from API
+export const getRandomMoviesFromAPI = async () => {
+    //fetch random movies from API...
+    let rMovies = await fetchData(randomMoviesUrl)
+    cacheRandomMovies(rMovies)
+    return rMovies
+}
+export const getRandomSeriesFromAPI = async () => {
+    //fetch random series from API....
+    let rSeries = await fetchData(randomSeriesUrl)
+    cacheRandomSeries(rSeries)
+    return rSeries
+}
+
+//helpers to update random movies/series entry in cache after fetching new batch from API
+const cacheRandomMovies = (randomMovies)=>{
+    const cacheKey = `randomMovies`;
+    localStorage.setItem(cacheKey, JSON.stringify(randomMovies));
+}
+const cacheRandomSeries = (randomSeries)=>{
+    const cacheKey = `randomSeries`;
+    localStorage.setItem(cacheKey, JSON.stringify(randomSeries));
+}
+

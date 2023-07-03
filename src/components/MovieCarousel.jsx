@@ -5,10 +5,9 @@ import MovieCard from './innerComponents/MovieCard'
 import { BiSolidChevronLeft } from 'react-icons/bi'
 import { BiSolidChevronRight } from 'react-icons/bi'
 import {TbReload} from "react-icons/tb"
-
+import { getRandomMoviesFromAPI, getRandomSeriesFromAPI, getRandomMoviesFromCache, getRandomSeriesFromCache } from '../services/movieService'
 
 export default function MovieCarousel({movies}) {
-    const [translateX, setTranslateX] = useState(0);
     const [renderMovies, setRenderMovies] = useState(true)
     const [numMovies, setNumMovies] = useState(0)
     const [displayIdxs, setDisplayIdxs] = useState([0, 1, 2])
@@ -19,7 +18,7 @@ export default function MovieCarousel({movies}) {
 
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true);
-    const randomUrl = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies'
+  /*  const randomUrl = 'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_movies'
     const randomSeriesUrl =  'https://moviesdatabase.p.rapidapi.com/titles/random?list=most_pop_series';
     const [fetchUrl, setFetchUrl] = useState(randomUrl);
     const host = 'moviesdatabase.p.rapidapi.com'
@@ -50,15 +49,46 @@ export default function MovieCarousel({movies}) {
   useEffect(()=>{
     fetchData();
   }, [])
-
+*/
+  const fetchMedia = async()=>{
+    if(movies){
+      let fMovies = getRandomMoviesFromCache()
+      if(fMovies == null){
+        try{
+          fMovies = await getRandomMoviesFromAPI()
+          setFetchedMovies(fMovies)
+        }catch( error) {
+          setError(error.message)
+        }
+        //TODO error check
+      } else {
+        setFetchedMovies(fMovies)
+      }
+    }
+    else {
+      let fSeries = getRandomSeriesFromCache()
+      if(fSeries == null){
+        try{
+          fSeries = await getRandomSeriesFromAPI()
+          setFetchedSeries(fSeries)
+        }
+        catch(error){
+          setError(error.message)
+        }
+      } else {
+        setFetchedSeries(fSeries)
+      }
+    }
+  }
   useEffect(()=>{
-    setFetchUrl(()=> movies ? randomUrl : randomSeriesUrl)
+    fetchMedia()
+    //setFetchUrl(()=> movies ? randomUrl : randomSeriesUrl)
   }, [movies])
-
+/*
   useEffect(()=>{
     fetchData();
   }, [fetchUrl])
-  
+  */
   useEffect(()=>{
     if(fetchedMovies){
       setNumMovies(fetchedMovies.length)
@@ -79,20 +109,30 @@ export default function MovieCarousel({movies}) {
     const rotateLeft = ()=>{
         setRenderMovies(false)
         setDisplayIdxs((displayIdxs)=> displayIdxs.map((idx)=> (((idx - 1 ) % (numMovies ) ) + numMovies) % numMovies))       
-        setTranslateX("100%")
     }
 
     //rotate carousel to the right
     const rotateRight = ()=>{
         setRenderMovies(false)
         setDisplayIdxs((displayIdxs)=> displayIdxs.map((idx)=>(idx + 1) % (numMovies)))
-        setTranslateX("-100%")
     }
 
-
     //fetch new media button click event handler to get new batch of random movies/series
-    const fetchNewMedia = ()=>{
-      console.log("fetch new media")
+    const fetchNewMedia = async ()=>{
+      try{
+        console.log("fetch new media")
+        if(movies){
+          let newMovies = await getRandomMoviesFromAPI()
+          setFetchedMovies(newMovies)
+        } else {
+          let newSeries = await getRandomSeriesFromAPI()
+          setFetchedSeries(newSeries)
+        }
+      }
+      catch(error){
+        setError(error.message)
+      }
+      
     }
     useEffect(()=>{
         setRenderMovies(true)
