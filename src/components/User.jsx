@@ -5,15 +5,9 @@ import Header from './sharedComponents/Header.jsx'
 import Auth from "./Auth.jsx"
 import { getAuth } from "firebase/auth"
 import "../styles/User.scss"
-import { BiSolidUserCircle } from "react-icons/bi"
-import { BsPencilFill } from "react-icons/bs"
-
+import ProfilePic from './innerComponents/ProfilePic.jsx'
 const LoggedInUser = ({user})=>{
-  const [img, setImg] = useState(null)
-  const [imgAlt, setImgAlt] = useState(null)
-  const [loadingImg, setLoadingImg] = useState(true)
-  const [displayImg, setDisplayImg] = useState(false)
-  const defaultPicPath =  process.env.PUBLIC_URL + "/assets/defaultProfilePic.png"
+ 
   /**
    * Helper
    * Convert unix epoch timestamp to date
@@ -27,51 +21,13 @@ const LoggedInUser = ({user})=>{
     return date;
   };
 
-  useEffect(()=>{
-    if(user.photoURL !== null){
-      setImg(user.photoURL)
-      setImgAlt("user photo")
-      setDisplayImg(true)
-    }
-    else {
-      setLoadingImg(false)
-    }
-  }, [])
 
-  const handleImgLoad = ()=>{
-    setLoadingImg(false)
-    console.log("done loading profile pic...")
-  }
 
-  const handleImgErr = ()=>{
-    setImg(defaultPicPath)
-    setImgAlt("default img")
-  }
-
-  //Handler to allow user to change their profile pic
-  const changePic = ()=>{}
   
   console.log(user)
   return (
     <div className="liUser">
-      <div className="imgContainer">
-        { loadingImg && <p>loading img...</p>}
-        { displayImg ?
-            <img 
-              className="profilePic"
-              src={img} 
-              alt={imgAlt}
-              onLoad={handleImgLoad}
-              onError={handleImgErr}
-              />
-        : 
-          <div className='profileIconContainer'>
-            <BiSolidUserCircle className="profileIcon"/>
-            <BsPencilFill onClick={changePic} className="changePicIcon"/>
-          </div>
-        }
-        
-      </div>
+      <ProfilePic/>
       <p className="email">{user.email}</p>
 
       <div className="metaData">

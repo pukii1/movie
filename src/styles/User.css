@@ -26,10 +26,12 @@
   position: absolute;
   right: 10px;
   top: 70px;
+  opacity: 70%;
 }
 .user .liUser .imgContainer .profileIconContainer .changePicIcon:hover {
   cursor: pointer;
   color: #FC4A78;
+  opacity: 100%;
 }
 .user .liUser .metaData {
   display: flex;

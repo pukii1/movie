@@ -55,7 +55,9 @@
   user can now manually refresh the carousel and fetch a new batch of 10 movies or series via clicking a button
 - added some ui to User page and added inner comp LoggedInUser displayed when user is logged in   
   
-TODO: impl change user pic handler function
+- put user profile pic in its own component
+
+TODO: impl change user pic handler function + make user meta data collapsible
 TODO: reset Pwd + continue working on user/profile page layout
 TODO: add comments!!!
 TODO: rework movie-fetching for movieCarousel -> fetch 10 movies at a time, cache said movies, add refresh button to allow user to fetch new batch 

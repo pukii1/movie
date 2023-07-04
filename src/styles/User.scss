@@ -13,10 +13,31 @@
         .imgContainer{
             border-radius: 50%;
 
-            .profilePic{
-                width: 200px;
+            .liProfilePic{
+                position: relative;
+                .profilePic{
+                    width: 200px;
+                    
+                }
+                .changePicIconContainer{
+                    border-radius: 100%;
+                    background-color: $purple;
+                    padding: 10px;
+                    position: absolute;
+                    right: -10px;
+                    top: 170px;
+                    .changePicIcon{
+                        opacity: 70%;
+                        &:hover{
+                            cursor: pointer;
+                            color: $pink;
+                            opacity: 100%;
+                        }
+                    }
+                }
+                
             }
-
+            
             .profileIconContainer{
                 position: relative;
                 .profileIcon{
@@ -27,10 +48,11 @@
                     position: absolute;
                     right: 10px;
                     top: 70px; 
-
+                    opacity: 70%;
                     &:hover{
                         cursor: pointer;
                         color: $pink;
+                        opacity: 100%;
                     }
                 }
             }
