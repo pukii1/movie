@@ -16,9 +16,10 @@ const LoggedInUser = ({user})=>{
    * @returns timestamp converted to GMT date
    */
   const unixToGMT = (timestamp) => {
-    let ms = BigInt(timestamp) * BigInt(1000);
-    let date = new Date(Number(ms)).toUTCString();
-    return date;
+    console.log(timestamp)
+    let d = new Date(0)
+    d.setUTCSeconds(Math.floor(timestamp/1000))
+    return d.toUTCString();
   };
 
 
