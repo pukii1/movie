@@ -57,6 +57,11 @@
   
 - put user profile pic in its own component
 
+- changed image upload (to storage) + download (downloadURL to firebase DB) flow
+
+- added CORS auth in google console (added cors.json file + specified origin, method, maxAgeSeconds, set cors via gsutil in google terminal "gsutil cors set cors.json {bucketURL})
+- tutorial vid on yt: https://www.youtube.com/watch?v=tvCIEsk4Uas
+
 TODO: impl change user pic handler function + make user meta data collapsible
 TODO: reset Pwd + continue working on user/profile page layout
 TODO: add comments!!!

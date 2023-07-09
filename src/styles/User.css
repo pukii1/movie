@@ -12,8 +12,27 @@
 .user .liUser .imgContainer {
   border-radius: 50%;
 }
-.user .liUser .imgContainer .profilePic {
-  width: 200px;
+.user .liUser .imgContainer .liProfilePic {
+  position: relative;
+}
+.user .liUser .imgContainer .liProfilePic .profilePic {
+  height: 200px;
+}
+.user .liUser .imgContainer .liProfilePic .changePicIconContainer {
+  border-radius: 100%;
+  background-color: #7275A6;
+  padding: 10px;
+  position: absolute;
+  right: -10px;
+  top: 170px;
+}
+.user .liUser .imgContainer .liProfilePic .changePicIconContainer .changePicIcon {
+  opacity: 70%;
+}
+.user .liUser .imgContainer .liProfilePic .changePicIconContainer .changePicIcon:hover {
+  cursor: pointer;
+  color: #FC4A78;
+  opacity: 100%;
 }
 .user .liUser .imgContainer .profileIconContainer {
   position: relative;
