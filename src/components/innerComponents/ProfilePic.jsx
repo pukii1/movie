@@ -80,6 +80,7 @@ export default function ProfilePic() {
       if(user){
         //try to get profile pic download url from cache
         let profilePic = localStorage.getItem("profilePictureUrl")
+        console.log("trying to fetch profile pic url from cache")
         if(profilePic){
           //set profile pic
           setProfilePicUrl(profilePic)

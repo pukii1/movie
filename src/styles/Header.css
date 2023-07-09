@@ -6,6 +6,16 @@
   justify-content: center;
   align-items: center;
 }
+.header .profilePic {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  right: -39%;
+  border-radius: 50%;
+}
+.header .profilePic:hover {
+  cursor: pointer;
+}
 .header .dropdown-wrapper {
   position: relative;
   right: -40%;
