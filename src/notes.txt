@@ -62,9 +62,10 @@
 - added CORS auth in google console (added cors.json file + specified origin, method, maxAgeSeconds, set cors via gsutil in google terminal "gsutil cors set cors.json {bucketURL})
 - tutorial vid on yt: https://www.youtube.com/watch?v=tvCIEsk4Uas
 - added user profile pic icon to header + navigation to user profile page on click 
+- fixed utc epoch timestamp to GMT conversion in User comp
 
 TODO: recenter header title
-TODO: fix epoch to GMT conversion on user profile page
+TODO: fix epoch to GMT conversion on user profile page DONE
 TODO: reset Pwd + continue working on user/profile page layout
 TODO: make user meta data collapsible
 TODO: impl change user pic handler function DONE

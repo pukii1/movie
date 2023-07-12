@@ -25,7 +25,13 @@ export default function Login() {
   const [emailErrorTxt, setEmailErrorTxt] = useState("")
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [networkError, setNetworkError] = useState(false)
+  const networkErrorTxt = `Sorry u cant login atm.\nA network error occured...`
 
+  /**
+   * Error handler function
+   * handles various possible errs that could occur during a login attempt
+   * @param {} errCode error code describing the error that occured  
+   */
   const loginErrorHandling = (errCode)=>{
     console.log(errCode)
     switch(errCode){
@@ -44,8 +50,14 @@ export default function Login() {
     }
   }
   
-
-  //add red outline to email input field on "user-not-found" error
+  //ERROR HANDLING STYLING
+  //functions that respond to errors by updating the error-styling-class-flags
+  //that conditionally add error styling + msgs
+  
+  /**
+   * Updates error-styling-flag
+   * that adds/removes red outline to email input field on "user-not-found" error
+   */
   useEffect(()=>{
     if(userNotFound){
       setAddEmailErrorClass(true)
@@ -56,19 +68,24 @@ export default function Login() {
     }
   }, [userNotFound])
 
+  /**
+   * Updates error-styling-flag
+   * that adds/removes red outline to email input field on "invalid-email" error
+   */
+  useEffect(()=>{
+    if(invalidEmail){
+      setAddEmailErrorClass(true)
+      setEmailErrorTxt("Please enter a valid email adress.")
+    } else {
+      setEmailErrorTxt("");
+      setAddEmailErrorClass(false)
+    }
+  }, [invalidEmail])
 
-    //add red outline to email input field on "user-not-found" error
-    useEffect(()=>{
-      if(invalidEmail){
-        setAddEmailErrorClass(true)
-        setEmailErrorTxt("Please enter a valid email adress.")
-      } else {
-        setEmailErrorTxt("");
-        setAddEmailErrorClass(false)
-      }
-    }, [invalidEmail])
-  
-  //add red outline to pwd input field on "wrong-password" errror
+   /**
+   * Updates error-styling-flag
+   * that adds/removes red outline to pwd input field on "wrong-password" error
+   */
   useEffect(()=>{
     if(wrongPwd){
       setAddPasswordErrorClass(true);
@@ -78,17 +95,18 @@ export default function Login() {
   }, [wrongPwd])
 
 
-  useEffect(()=>{
-    if(networkError){
 
-    }
-  }, [networkError])
-  
+  //debug
   useEffect(()=>{
     console.log(error)
   }, [error])
 
-  //event handlers
+  /**
+   * Performs login once the user clicks the login button
+   * catches potential errors (invalid/wrong pwd etc.)
+   * passes those to the dedicated loginErrorHandling function
+   * @param {*} e event
+   */
   const login = (e)=>{
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, pwd)
@@ -104,36 +122,67 @@ export default function Login() {
       loginErrorHandling(error.code)
     });
   }
-  const togglePwdVisibility = (e)=>{
-    e.preventDefault(); 
-    setShowPwd((prev)=>!prev)
-  }
-  useEffect(()=>{
-    setPwdType(showPwd ? "text" : "password")
-  }, [showPwd])
 
-  const resetPwd = (e)=>{
-    e.preventDefault();
-    console.log("resetting pwd....")
-  }
+  //EMAIL related functions
+
+  /**
+   * handles email input
+   * resets userNotFound + invalidEmail err flags
+   * updates email input value 
+   * @param {*} e event
+   */
   const onChangeEmail = (e)=>{
     setUserNotFound(false);
     setInvalidEmail(false);
     setEmail(e.target.value)
   }
+
+  //PASSWORD related functions
+  /**
+   * Handles password input
+   * resets wrongPwd err flag
+   * updates password input value
+   * @param {*} e event 
+   */
   const onChangePwd = (e)=>{
     setWrongPwd(false)
     setPwd(e.target.value)
   }
   
+  /**
+   * toggles pwd visibility in ui 
+   * when the eye-icon is clicked
+   * @param {*} e event
+   */
+  const togglePwdVisibility = (e)=>{
+    e.preventDefault(); 
+    setShowPwd((prev)=>!prev)
+  }
+  /**
+   * Responds to changes to the showPwd flag
+   * updates the showPwdFlag accordingly to adjust its visibility in the ui
+   */
+  useEffect(()=>{
+    setPwdType(showPwd ? "text" : "password")
+  }, [showPwd])
+
+  /**
+   * initiates password reset mechanism when respective button is clicked
+   * @param {*} e event
+   */
+  const resetPwd = (e)=>{
+    //TODO: implement
+    e.preventDefault();
+    console.log("resetting pwd....")
+  }
+
+
+
 
 
   return (
     <div className="login">
-
-
-
-      {networkError && <div><p>Sorry u cant login atm</p><p>A network error occured...</p></div>}
+      {networkError && {networkErrorTxt}}
       { !networkError && <>
        <label htmlFor="emailInput">Email</label>
         <input 
