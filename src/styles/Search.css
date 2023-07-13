@@ -1,0 +1,37 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.search .searchContainer {
+  text-align: center;
+  color: #7275A6;
+  width: 60%;
+  margin: 10px auto;
+}
+.search .searchContainer .searchbar {
+  margin: 0 auto;
+  border: 1px solid #7275A6;
+  width: 60%;
+  padding: 5px 0px 5px 0px;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 20px;
+}
+.search .searchContainer .searchbar input {
+  border: none;
+  flex-basis: 80%;
+  background-color: transparent;
+  caret-color: #7275A6;
+}
+.search .searchContainer .searchbar input:focus {
+  outline: none;
+}
+.search .searchContainer .searchbar .searchSelectors {
+  flex-basis: 10%;
+  display: flex;
+  justify-content: space-around;
+}
+.search .searchContainer .searchbar .searchSelectors *:hover {
+  cursor: pointer;
+}
+.search .searchContainer .searchbar .searchSelectors .filter.highlight {
+  color: #FC4A78;
+}/*# sourceMappingURL=Search.css.map */

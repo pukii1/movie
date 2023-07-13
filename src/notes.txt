@@ -64,6 +64,11 @@
 - added user profile pic icon to header + navigation to user profile page on click 
 - fixed utc epoch timestamp to GMT conversion in User comp
 
+- added reset pwd feature
+- started to impl ui for Search page
+
+TODO: impl ui for Search filters
+TODO: add redirect feature to pwd reset flow
 TODO: recenter header title
 TODO: fix epoch to GMT conversion on user profile page DONE
 TODO: reset Pwd + continue working on user/profile page layout

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from "react"
 import '../../styles/SignUp.scss';
 import { Navigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, sendPasswordResetEmail } from "firebase/auth";
 import {auth} from "../../configs/firebaseConfig"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -171,9 +171,28 @@ export default function Login() {
    * @param {*} e event
    */
   const resetPwd = (e)=>{
-    //TODO: implement
     e.preventDefault();
-    console.log("resetting pwd....")
+    
+    const auth = getAuth();
+    if(email){
+      setEmailErrorTxt("")
+      setAddEmailErrorClass(false)
+      sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("sent reset email...")
+
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // TODO add error handling
+      });
+    }
+    else {
+      setEmailErrorTxt("Please enter your email address to receive the password-reset email")
+      setAddEmailErrorClass(true)
+    }
+    
   }
 
 
