@@ -1,0 +1,37 @@
+/*SASS partial for main color definition*/
+/*mixins*/
+.filters {
+  color: #ffffff;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 1%);
+  height: 400px;
+  border-radius: 0px 0px 20px 20px;
+  width: 60%;
+  z-index: 200;
+  padding: 10px;
+  background-color: #7275A6;
+}
+.filters .mediaType {
+  background-color: #1F2034;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 5px;
+}
+.filters .mediaType .mediaButton {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #1F2034;
+}
+.filters .mediaType .mediaButton:hover {
+  background-color: #FC4A78;
+  cursor: pointer;
+}
+.filters .mediaType .mediaButton.selected {
+  font-weight: bolder;
+  background-color: #FC4A78;
+}/*# sourceMappingURL=SearchFilters.css.map */

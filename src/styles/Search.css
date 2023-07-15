@@ -4,6 +4,7 @@
   text-align: center;
   color: #7275A6;
   width: 60%;
+  position: relative;
   margin: 10px auto;
 }
 .search .searchContainer .searchbar {

@@ -71,7 +71,9 @@
 - added custom basic carousel comp to render search results on search page
 - added conditional ratings display to MovieCard (now renders a blocked icon instead of star+ratings
   if the respective movies ratings are undefined/null)
+- started impl search filters ui
 
+TODO: consider caching search results to improve ux and persist the search results + add clear cache/search option
 TODO: try to extend basic carousel  to reuse it in MovieCarousel  
 TODO: impl ui for Search filters
 TODO: add redirect feature to pwd reset flow

@@ -1,0 +1,38 @@
+@import "./colors.scss";
+
+.filters{
+    color: $white;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 1%);
+    height: 400px;
+    border-radius: 0px 0px 20px 20px;
+    width: 60%;
+    z-index: 200;
+    padding: 10px;
+    background-color: $purple;
+
+    .mediaType{
+        background-color: $darkPurple;
+        width: 50%;
+        margin: 0 auto;
+        border-radius: 5px;
+        padding: 5px;
+        .mediaButton{
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            background-color:$darkPurple;
+            &:hover{
+                background-color: $pink;
+                cursor:pointer;
+            }
+            &.selected{
+                font-weight: bolder;
+                background-color: $pink;
+            }
+        }
+    }
+}
