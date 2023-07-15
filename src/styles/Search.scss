@@ -16,6 +16,7 @@
             border-radius: 20px;
             input{
                 border: none;
+                color:$purple;
                 flex-basis: 80%;
                 background-color: transparent;
                 caret-color: $purple;
@@ -39,5 +40,10 @@
             }
             
         }
+    }
+
+    .searchResults{
+        display: flex;
+        justify-content: space-around;
     }
 }

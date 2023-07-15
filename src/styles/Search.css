@@ -17,6 +17,7 @@
 }
 .search .searchContainer .searchbar input {
   border: none;
+  color: #7275A6;
   flex-basis: 80%;
   background-color: transparent;
   caret-color: #7275A6;
@@ -34,4 +35,8 @@
 }
 .search .searchContainer .searchbar .searchSelectors .filter.highlight {
   color: #FC4A78;
+}
+.search .searchResults {
+  display: flex;
+  justify-content: space-around;
 }/*# sourceMappingURL=Search.css.map */

@@ -4,6 +4,7 @@ import { useState, useEffect} from "react"
 import LoadingWaves from '../LoadingWaves'
 import {AiFillStar} from "react-icons/ai"
 import { BsFillBookmarkHeartFill } from 'react-icons/bs'
+import { ImBlocked } from "react-icons/im"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { likeMovie, likeTVSeries } from '../../services/movieService'
 
@@ -107,13 +108,17 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate}) {
     try {
       const response = await fetch(ratingsUrl, options);
       const result = await response.json();
-      setRating(result.results.averageRating);
+      console.log(result.results)
+      
+      setRating(result.results ? result.results.averageRating : null);
       setRatingsLoaded(true)
     } catch (error) {
       console.error(error);
     }
   }
-
+useEffect(()=>{
+  console.log(`rating ${rating}`)
+}, [rating])
   /**
    * Add media to fav lists (depending on media-type)
    */
@@ -167,7 +172,13 @@ export default function MovieCard({data, lastMovie, rotationIndex, rotate}) {
         <p className="yr">{data.releaseYear?.year}</p>
         {ratingsLoaded && 
           <p className="rating">
-            <span><AiFillStar/></span>{rating}%
+            { rating !== null  
+              ? ( <>
+                  <span><AiFillStar/></span>{rating}%
+                  </>
+                )
+              : (<ImBlocked/>)
+            }
           </p>}
       </div>
     </div>
